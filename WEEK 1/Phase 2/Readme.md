@@ -18,7 +18,7 @@ This phase felt like the point where the design stopped being Verilog and starte
 
 ---
 
-# Running Floorplan
+# 1. Running Floorplan
 
 The floorplanning stage was executed after synthesis.
 
@@ -78,7 +78,7 @@ A balanced aspect ratio helps:
 
 ---
 
-# Understanding Design Configuration
+# 2. Understanding Design Configuration
 
 The design configuration file was inspected.
 
@@ -96,7 +96,7 @@ set ::env(FP_CORE_UTIL) "10"
 
 ---
 
-# Utilization Factor
+#Utilization Factor
 
 Utilization determines how densely cells occupy the available core.
 
@@ -130,7 +130,7 @@ Lower utilization results in:
 
 ---
 
-# Verifying Applied Configuration
+# 3. Verifying Applied Configuration
 
 The generated run configuration was inspected.
 
@@ -169,7 +169,7 @@ The run folder acts as a frozen snapshot of the executed configuration.
 
 ---
 
-# Observing Die Area
+# 4. Observing Die Area
 
 The generated DEF file was inspected.
 
@@ -222,7 +222,7 @@ More whitespace produced larger chip dimensions.
 
 ---
 
-# Viewing Floorplan in Magic
+# 5. Viewing Floorplan in Magic
 
 The floorplan was loaded using Magic.
 
@@ -253,7 +253,7 @@ This allowed visualization of:
 
 ---
 
-# Floorplan Layout Review
+# 6. Floorplan Layout Review
 
 ## Observation
 
@@ -273,7 +273,7 @@ The layout looked like an empty city waiting for buildings.
 
 ---
 
-# Standard Cells and Macro Awareness
+# 7. Standard Cells and Macro Awareness
 
 Zooming into the layout revealed standard cells.
 
@@ -319,7 +319,7 @@ Standard cells are placed automatically during placement, while macros remain fi
 
 ---
 
-# Decaps and Metal Pins
+# 8. Decaps and Metal Pins
 
 ## Magic Command
 
@@ -351,7 +351,7 @@ Decap cells act as local charge reservoirs to:
 
 ---
 
-# Power Distribution Network (PDN)
+# 9. Power Distribution Network (PDN)
 
 During floorplan execution OpenLane automatically generated the PDN.
 
@@ -387,7 +387,7 @@ This showed that floorplanning is not only geometry but also electrical planning
 
 ---
 
-# Modifying Utilization
+# 10. Modifying Utilization
 
 Before:
 
@@ -413,7 +413,7 @@ Increasing utilization reduced whitespace and compressed the design.
 
 ---
 
-# Confirming Configuration Override
+# 11. Confirming Configuration Override
 
 Observed:
 
@@ -433,7 +433,7 @@ This confirmed successful configuration override.
 
 ---
 
-# Updated Die Area
+# 12. Updated Die Area
 
 Initial:
 
@@ -476,7 +476,7 @@ More utilization → Smaller area → Higher density
 
 ---
 
-# Running Placement
+# 13. Running Placement
 
 ## Command
 
@@ -518,7 +518,7 @@ Higher utilization increases placement density and may increase routing congesti
 
 ---
 
-# Viewing Placement in Magic
+# 14. Viewing Placement in Magic
 
 ## Command
 
@@ -536,7 +536,7 @@ def read picorv32a.def &
 
 ---
 
-# Placement Layout
+# 15. Placement Layout
 
 ## Observation
 
@@ -562,7 +562,7 @@ This was the first stage where the chip began looking like real hardware.
 
 ---
 
-# Post-Placement Standard Cell Inspection
+# 16. Post-Placement Standard Cell Inspection
 
 ## Observation
 
