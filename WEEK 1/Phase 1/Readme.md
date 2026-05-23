@@ -21,7 +21,7 @@ The OpenLANE container was launched and the design was prepared interactively.
 
 ---
 
-# Design Preparation
+# 1. Design Preparation
 
 ## Observation
 
@@ -44,7 +44,7 @@ This makes experiments reproducible and prevents overwriting previous runs.
 
 ---
 
-# Run Directory Structure
+# 2. Run Directory Structure
 
 ## Generated Run Directory
 
@@ -74,7 +74,7 @@ It felt surprisingly organized for such a complex ASIC flow.
 
 ---
 
-# Running Synthesis
+# 3. Running Synthesis
 
 ## Synthesis Execution
 
@@ -103,7 +103,7 @@ At this point, the design stops looking like “code” and starts looking like 
 
 ---
 
-# Synthesis Reports
+# 4. Synthesis Reports
 
 ## Generated Reports
 
@@ -126,7 +126,7 @@ This showed how much information ASIC tools generate automatically after compila
 
 ---
 
-# Cell Count Analysis
+# 5. Cell Count Analysis
 
 ## Synthesized Cell Statistics
 
@@ -159,7 +159,7 @@ This gave a better appreciation for how large even a “small” processor reall
 
 ---
 
-# Chip Area Report
+# 6. Chip Area Report
 
 ## Area Estimation
 
@@ -192,7 +192,7 @@ ASIC design is basically controlled engineering chaos wrapped in reports.
 
 ---
 
-# Flip-Flop Analysis
+# 7. Flip-Flop Analysis
 
 ## DFF Count Report
 
@@ -226,7 +226,7 @@ The remaining cells are mostly combinational logic.
 
 ---
 
-# Pre-Synthesis Statistics
+# 8. Pre-Synthesis Statistics
 
 ## Initial Synthesis Statistics
 
@@ -247,7 +247,7 @@ Comparing pre-synthesis and mapped reports helped visualize how synthesis reshap
 
 ---
 
-# Timing Analysis
+# 9. Timing Analysis
 
 ## Timing Summary Report
 
@@ -281,7 +281,7 @@ This is where ASIC design suddenly feels very real.
 
 ---
 
-# Post-Synthesis Netlist
+# 10. Post-Synthesis Netlist
 
 ## Gate-Level Netlist
 
