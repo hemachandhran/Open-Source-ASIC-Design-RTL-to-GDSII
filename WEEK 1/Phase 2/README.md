@@ -237,7 +237,7 @@ Placement cannot begin until this infrastructure exists.
 
 While exploring the layout, standard-cell structures became visible.
 
-![](Screenshots/7_standard_cells in.png)
+![](Screenshots/7_standard_cells_in.png)
 
 ### Observation
 
@@ -272,6 +272,7 @@ Macros such as SRAM:
 ### Learning
 
 Macros strongly influence floorplanning because their fixed dimensions restrict available placement area and routing resources.
+
 
 ---
 
@@ -469,7 +470,7 @@ def read picorv32a.def &
 
 The previously empty floorplan now contained thousands of placed standard cells.
 
-The complete placement layout was then examined.
+# The complete placement layout
 
 ![](Screenshots/15_placement_full_layout.png)
 
@@ -481,7 +482,7 @@ Rows that were previously empty had become populated with logic cells.
 
 ---
 
-To better understand placement behavior, the layout was inspected at a higher zoom level.
+# The layout was inspected at a higher zoom level.
 
 ![](Screenshots/16_post_placement_standard_cell_view.png)
 
