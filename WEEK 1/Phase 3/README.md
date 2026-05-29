@@ -129,21 +129,71 @@ Instead of being ignored, the cell was selected during technology mapping and be
 
 ## Synthesis Strategy Investigation
 
-The synthesis configuration was inspected.
+# Timing-Driven Synthesis Strategy Investigation
 
-Observed:
+## Objective
 
-```text
-SYNTH_STRATEGY = AREA 0
+After integrating the custom inverter, the design continued to report **positive setup slack** during synthesis.
+
+Since the goal of this phase was to further investigate timing behavior and optimization techniques, a **timing-oriented synthesis strategy** was explored.
+
+---
+
+## Original Synthesis Configuration
+
+The initial synthesis strategy prioritized area optimization:
+
+```tcl
+set ::env(SYNTH_STRATEGY) "AREA 0"
 ```
 
-### Observation
+This configuration directs the synthesis engine to minimize silicon area during technology mapping.
 
-`AREA 0` generates an area-optimized netlist.
+---
 
-Initially I expected timing violations because of the custom inverter, but the synthesis STA report still showed positive slack.
+## Modified Synthesis Configuration
 
-This prompted a deeper investigation into the timing environment being used.
+To evaluate potential timing improvements, the synthesis strategy was changed to:
+
+```tcl
+set ::env(SYNTH_STRATEGY) "DELAY 0"
+```
+
+This configuration instructs the synthesis engine to prioritize timing optimization over area reduction, allowing faster implementations of critical logic paths to be selected.
+
+---
+
+## Strategy Comparison
+
+| Strategy  | Primary Goal        | Expected Behavior                                                |
+| --------- | ------------------- | ---------------------------------------------------------------- |
+| `AREA 0`  | Area Optimization   | Uses fewer cells and minimizes silicon area                      |
+| `DELAY 0` | Timing Optimization | Uses faster cells and stronger drive strengths to improve timing |
+
+---
+
+## Design Trade-Off
+
+Changing the synthesis strategy from **AREA 0** to **DELAY 0** represents a common ASIC design trade-off:
+
+```text
+AREA 0  →  Lower Area
+DELAY 0 →  Better Timing
+```
+
+The expectation was that synthesis would introduce additional cells and stronger drive-strength gates to improve the timing characteristics of critical paths.
+
+---
+
+## Evaluation Metrics
+
+The design was synthesized again using the modified strategy, and the impact was analyzed using the following metrics:
+
+* Cell Count
+* Chip Area
+* Setup Slack
+
+These results were then compared against the original AREA 0 synthesis run to understand the timing-versus-area trade-off.
 
 ---
 
@@ -173,9 +223,6 @@ No setup or hold violations were reported.
 At this point the custom inverter did not appear to create any timing issues.
 
 ---
-
-# Investigating the Timing Discrepancy
-
 ## Checking the Timing Environment
 
 The OpenLane timing environment was examined.
@@ -318,25 +365,110 @@ A timing-clean netlist under one corner may fail timing under another corner.
 
 # Timing Optimization Experiments
 
-## Modifying Synthesis Parameters
+## Timing Optimization using Synthesis Parameters
 
-Several synthesis parameters were explored:
+### Objective
 
-```tcl
-SYNTH_STRATEGY
-SYNTH_SIZING
-SYNTH_BUFFERING
-```
+Improve timing performance by modifying synthesis parameters in `config.tcl` and observe the impact on area and timing metrics.
+
+---
+
+### Configuration Changes
+
+The following parameters were added to `config.tcl`:
 
 ![](Screenshots/7.0.png)
+#### SYNTH_STRATEGY
+
+Modified from:
+
+```tcl
+set ::env(SYNTH_STRATEGY) "AREA 0"
+```
+
+to:
+
+```tcl
+set ::env(SYNTH_STRATEGY) "DELAY 0"
+```
+
+This instructs the synthesis engine to prioritize timing optimization over area reduction.
+
+#### SYNTH_SIZING
+
+Enabled cell sizing during synthesis:
+
+```tcl
+set ::env(SYNTH_SIZING) "1"
+```
+
+This allows replacement of lower drive-strength cells with higher drive-strength variants to improve timing.
+
+Example:
+
+```text
+sky130_fd_sc_hd__inv_2
+        ↓
+sky130_fd_sc_hd__inv_8
+```
+
+---
+
+### Re-running Synthesis
+
+After updating the configuration, synthesis was executed again:
+
+```tcl
+prep -design picorv32a -overwrite
+run_synthesis
+```
+
+---
+
+### Results
+#### After Timing Optimization
+
+```text
+SYNTH_STRATEGY = DELAY 0
+SYNTH_SIZING   = 1
+```
+
+```text
+Number of Cells : 21256
+Chip Area       : 213627.386 µm²
+Worst Slack     : 4.03 ns
+```
+![](Screenshots/7.1.png)
+![](Screenshots/7.2.png)
+---
 
 ### Observation
 
-These settings produced only small improvements in timing.
+Enabling timing-driven synthesis increased the number of mapped cells and overall chip area.
 
-The OpenLane synthesis reports improved slightly, but the custom OpenSTA analysis still reported violations.
+```text
+Cell Count
+15762 → 21256
 
-This suggested that synthesis optimization alone was not sufficient.
+Chip Area
+160816.736 µm² → 213627.386 µm²
+```
+
+At the same time, setup timing improved significantly.
+
+```text
+Worst Setup Slack
+0.52 ns → 4.03 ns
+```
+
+The increase in area is due to the use of stronger drive-strength cells and timing-optimized logic implementations selected by the synthesis engine.
+
+This demonstrates the trade-off between timing and area during logic synthesis.
+
+```text
+Better Timing ↔ Higher Area
+```
+
 
 ---
 
