@@ -127,9 +127,7 @@ Instead of being ignored, the cell was selected during technology mapping and be
 
 ---
 
-## Synthesis Strategy Investigation
-
-# Timing-Driven Synthesis Strategy Investigation
+# Exploring Timing-Driven Synthesis
 
 ## Objective
 
@@ -363,9 +361,7 @@ A timing-clean netlist under one corner may fail timing under another corner.
 
 ---
 
-# Timing Optimization Experiments
-
-## Timing Optimization using Synthesis Parameters
+# Timing Optimization using Synthesis Parameters
 
 ### Objective
 
