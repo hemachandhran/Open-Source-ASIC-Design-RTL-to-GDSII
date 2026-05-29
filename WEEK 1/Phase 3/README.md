@@ -76,6 +76,8 @@ Without these additions, the custom cell would not be available during technolog
 
 The custom LEF was merged along with the SKY130 standard-cell library before synthesis.
 
+![](Screenshots/3.0.png)
+
 ### Observation
 
 The LEF merged successfully without any errors.
@@ -96,7 +98,7 @@ During synthesis:
 * Gate-level netlist was generated
 * Built-in STA was executed
 
-![](Screenshots/3.png)
+![](Screenshots/3.1.png)
 
 ### Observation
 
@@ -135,8 +137,6 @@ Observed:
 SYNTH_STRATEGY = AREA 0
 ```
 
-![](Screenshots/5.png)
-
 ### Observation
 
 `AREA 0` generates an area-optimized netlist.
@@ -162,7 +162,7 @@ Reported:
 | Worst Setup Slack | 0.52 ns |
 | Worst Hold Slack  | 0.17 ns |
 
-![](Screenshots/6.0.png)
+![](Screenshots/5.png)
 
 ### Observation
 
@@ -188,9 +188,6 @@ LIB_FASTEST
 LIB_SLOWEST
 LIB_TYPICAL
 ```
-
-![](Screenshots/6.1.png)
-
 ### Observation
 
 Although custom liberty files had been added, the synthesis STA results still appeared unchanged.
@@ -229,7 +226,7 @@ read_verilog picorv32a.v
 read_sdc my_base.sdc
 ```
 
-![](Screenshots/6.2.png)
+![](Screenshots/6.0.png)
 
 ### Observation
 
@@ -251,7 +248,7 @@ Result:
 Slack = +0.252 ns
 ```
 
-![](Screenshots/6.3.png)
+![](Screenshots/6.1.png)
 
 ### Observation
 
@@ -267,7 +264,7 @@ Result:
 Slack = +1.32 ns
 ```
 
-![](Screenshots/7.0.png)
+![](Screenshots/6.2.png)
 
 ### Observation
 
@@ -283,7 +280,7 @@ Result:
 Slack = -10.75 ns
 ```
 
-![](Screenshots/7.1.png)
+![](Screenshots/6.3.png)
 
 ### Observation
 
@@ -302,7 +299,7 @@ WNS = -10.75 ns
 TNS = -552.47 ns
 ```
 
-![](Screenshots/7.2.png)
+![](Screenshots/6.4.png)
 
 ### Key Observation
 
@@ -331,7 +328,7 @@ SYNTH_SIZING
 SYNTH_BUFFERING
 ```
 
-![](Screenshots/8.0.png)
+![](Screenshots/7.0.png)
 
 ### Observation
 
@@ -360,7 +357,7 @@ set_clock_transition 0.15 [get_clocks clk]
 set_input_transition 0.15 [all_inputs]
 ```
 
-![](Screenshots/8.1.png)
+![](Screenshots/8.0.png)
 
 ### Observation
 
@@ -385,7 +382,7 @@ WNS = -2.36 ns
 TNS = -31.90 ns
 ```
 
-![](Screenshots/9.png)
+![](Screenshots/8.1.png)
 
 ### Observation
 
@@ -424,7 +421,7 @@ sky130_vsdinv
 
 was successfully located.
 
-![](Screenshots/10.png)
+![](Screenshots/9.png)
 
 ### Observation
 
