@@ -508,12 +508,6 @@ After applying them, the timing violations were reduced significantly.
 ## Updated OpenSTA Results
 
 Reported:
-
-```text
-WNS = -2.36 ns
-TNS = -31.90 ns
-```
-
 ![](Screenshots/8.1.png)
 
 ### Observation
