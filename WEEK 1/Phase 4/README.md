@@ -384,6 +384,37 @@ Clock Tree Synthesis exists primarily to solve the fanout problem associated wit
 Without CTS, a single clock source attempting to drive thousands of flip-flops would create severe timing and signal integrity issues.
 
 ---
+# Visualizing the Clock Buffer Distribution
+
+To better understand how Clock Tree Synthesis physically distributes the clock signal, the post-CTS layout was examined in Magic at a higher zoom level.
+
+![](Screenshots/9.png)
+
+### Observation
+
+Several clock buffer cells (`clkbuf`) can be seen distributed across the design layout. At first glance, these buffers may appear randomly scattered throughout the chip.
+
+### Investigation
+
+The objective was to understand whether CTS places clock buffers arbitrarily or follows a structured clock distribution strategy.
+
+### Finding
+
+The clock buffers are not randomly placed.
+
+During Clock Tree Synthesis, OpenROAD constructs a clock distribution network based on an H-Tree style topology. The inserted buffers are strategically positioned throughout the layout so that the clock signal reaches all sequential elements with minimal skew and balanced delay.
+
+Each clock buffer acts as an intermediate driver, dividing the clock load into smaller branches and reducing excessive fanout on any single clock net.
+
+### Learning
+
+The physical placement of clock buffers is one of the key reasons CTS improves timing performance.
+
+Instead of allowing one clock source to drive thousands of flip-flops directly, the H-Tree based clock network distributes the clock through multiple buffer stages, creating a more balanced clock arrival time across the entire design.
+
+This balanced distribution helps reduce clock skew, improves timing predictability, and enables the clock network to reliably drive all 1613 clock sinks present in the design.
+
+---
 
 # Final Thoughts
 
@@ -415,5 +446,6 @@ Understanding these effects is essential because timing closure is no longer det
 * **OpenSTA** - Static Timing Analysis
 * **OpenROAD** - Physical Design Operations
 * **SKY130A PDK** - Process Design Kit
+* **Magic VLSI** - Layout Visualization
 * **GitHub Codespaces** - Linux Development Environment
 * **Visual Studio Code** - Editing and Analysis
