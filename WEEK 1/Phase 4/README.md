@@ -448,4 +448,3 @@ Understanding these effects is essential because timing closure is no longer det
 * **SKY130A PDK** - Process Design Kit
 * **Magic VLSI** - Layout Visualization
 * **GitHub Codespaces** - Linux Development Environment
-* **Visual Studio Code** - Editing and Analysis
