@@ -351,9 +351,11 @@ The journey from RTL to silicon is long, but completing this stage provided a mu
 
 ## Tools Used
 
-- OpenLane
-- OpenROAD
-- Magic VLSI
-- TritonRoute
-- FastRoute
-- SKY130 PDK
+- **OpenLane v1.0.2** – RTL-to-GDSII ASIC implementation flow
+- **OpenROAD** – PDN generation, routing, and physical design operations
+- **FastRoute** – Global routing and route guide generation
+- **TritonRoute** – Detailed routing and DRC-aware interconnect generation
+- **Magic VLSI** – Layout visualization and inspection
+- **SPEF Extractor** – Parasitic RC extraction for post-routing STA
+- **SKY130A PDK** – Technology libraries and design rules
+- **GitHub Codespaces** – Linux development environment
