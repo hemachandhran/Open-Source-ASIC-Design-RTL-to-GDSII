@@ -596,4 +596,3 @@ This phase demonstrated the importance of multi-corner timing analysis and showe
 * **Magic VLSI** - Layout Visualization
 * **SKY130A PDK** - Process Design Kit
 * **GitHub Codespaces** - Linux Development Environment
-* **Visual Studio Code** - Editing and Analysis
