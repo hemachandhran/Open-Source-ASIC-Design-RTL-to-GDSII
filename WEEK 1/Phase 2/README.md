@@ -545,5 +545,4 @@ Placement determines how that functionality is physically organized inside silic
 * **Magic VLSI** – Layout Visualization
 * **SKY130A PDK** – Process Design Kit
 * **GitHub Codespaces** – Linux Development Environment
-* **Visual Studio Code** – Editing and Analysis
-* **Docker** – Containerized OpenLANE Environment
+
