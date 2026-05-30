@@ -390,7 +390,5 @@ The RTL may describe the processor, but synthesis reveals what the processor act
 * **Yosys** – Logic Synthesis
 * **OpenSTA** – Static Timing Analysis
 * **SKY130A PDK** – Process Design Kit
-* **PicoRV32A** – RISC-V Processor Core
 * **GitHub Codespaces** – Linux Development Environment
-* **Visual Studio Code** – Editing and Analysis
-* **Docker** – Containerized OpenLANE Environment
+
