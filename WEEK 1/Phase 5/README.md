@@ -340,6 +340,9 @@ The Power Distribution Network ensured reliable delivery of power and ground thr
 
 One important takeaway from this phase was realizing how iterative the physical design flow truly is. A small issue in floorplanning, placement, CTS, or routing can easily force multiple optimization cycles before a design becomes signoff-ready.
 
+---
+## Personal View
+
 Working through the complete PDN and routing flow on PicoRV32A offered valuable exposure to concepts used in industrial backend design tools. OpenLane provides a practical platform for understanding modern physical implementation methodologies and serves as an excellent bridge toward advanced timing closure and signoff verification workflows.
 
 The journey from RTL to silicon is long, but completing this stage provided a much deeper appreciation of how physical structures ultimately become a manufacturable integrated circuit.
