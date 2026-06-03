@@ -187,6 +187,30 @@ The complete ORFS execution reached final reporting in approximately 5 minutes a
 Routing and Clock Tree Synthesis consumed noticeably more runtime than synthesis or floorplanning, demonstrating how physical implementation complexity increases as the design progresses toward signoff.
 
 ---
+## Auto-Generated Visualization Reports
+
+During the RTL-to-GDS flow execution, ORFS automatically generated several visualization images inside the report directory. These images provide graphical insights into different stages of the physical design flow and can be found in the **Images/** folder of this phase.
+
+### Generated Images
+
+| Image File | Description |
+|------------|-------------|
+| `final_all.webp.png` | Combined final layout view of the design |
+| `final_placement.webp.png` | Standard-cell placement visualization |
+| `final_routing.webp.png` | Final routed design visualization |
+| `final_clocks.webp.png` | Clock network visualization |
+| `cts_core_clock.webp.png` | CTS clock-tree structure view |
+| `cts_core_clock_layout.webp.png` | Clock-tree layout after CTS |
+| `final_congestion.webp.png` | Routing congestion analysis |
+| `final_ir_drop.webp.png` | IR-drop visualization report |
+| `final_resizer.webp.png` | Timing optimization (resizer) visualization |
+| `final_worst_path.webp.png` | Worst timing path visualization |
+
+### Observation
+
+These images were generated automatically by ORFS/OpenROAD during report generation and provide a graphical representation of the physical implementation process. They complement the log files and timing reports by visually showing placement quality, routing completion, clock distribution, congestion hotspots, IR-drop analysis, and timing-critical paths within the final design.
+
+---
 
 # Final Thoughts
 
