@@ -396,7 +396,7 @@ The objective was to understand whether CTS places clock buffers arbitrarily or 
 
 ### Finding
 
-During Clock Tree Synthesis, OpenROAD constructs a clock distribution network based on an H-Tree style topology. The inserted buffers are strategically positioned throughout the layout so that the clock signal reaches all sequential elements with minimal skew and balanced delay.
+During Clock Tree Synthesis, OpenROAD constructs a clock distribution network based on H-tree topology and various different algorithms. The inserted buffers are strategically positioned throughout the layout so that the clock signal reaches all sequential elements with minimal skew and balanced delay.
 
 Each clock buffer acts as an intermediate driver, dividing the clock load into smaller branches and reducing excessive fanout on any single clock net.
 
@@ -405,6 +405,7 @@ Each clock buffer acts as an intermediate driver, dividing the clock load into s
 The physical placement of clock buffers is one of the key reasons CTS improves timing performance.
 
 Instead of allowing one clock source to drive thousands of flip-flops directly, the H-Tree based clock network distributes the clock through multiple buffer stages, creating a more balanced clock arrival time across the entire design.
+
 ---
 
 # Final Thoughts
