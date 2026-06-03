@@ -1,10 +1,10 @@
-# Post-CTS Timing Analysis using OpenROAD (Sky130)
+# CTS Timing Analysis using OpenROAD (Sky130)
 
 ---
 
 # Overview
 
-After completing Placement and Clock Tree Synthesis (CTS), the next objective was to analyze how the insertion of the physical clock network affected the timing behavior of the design.
+After completing Floorplan and Placement, the next objective was to analyze how the insertion of the physical clock network affected the timing behavior of the design.
 
 Unlike pre-CTS analysis, where clocks are assumed to be ideal, post-CTS timing analysis considers the actual clock buffers and routing delays introduced during Clock Tree Synthesis.
 
@@ -262,7 +262,6 @@ To understand the impact of Clock Tree Synthesis, timing results before and afte
 
 ```text
 Hold Slack  = +0.2521 ns
-
 Setup Slack = -10.7461 ns
 
 WNS = -10.75 ns
@@ -273,7 +272,6 @@ TNS = -552.47 ns
 
 ```text
 Hold Slack  = -0.7100 ns
-
 Setup Slack = -5.4351 ns
 ```
 
@@ -349,8 +347,6 @@ Clock skew is a realistic reflection of the physical clock network created durin
 
 The measured skew confirms that the timing engine is now using actual propagated clocks rather than ideal clock assumptions.
 
-This is one of the strongest indicators that post-CTS timing analysis is accurately modeling the physical implementation.
-
 ---
 
 # Fanout Observation
@@ -400,8 +396,6 @@ The objective was to understand whether CTS places clock buffers arbitrarily or 
 
 ### Finding
 
-The clock buffers are not randomly placed.
-
 During Clock Tree Synthesis, OpenROAD constructs a clock distribution network based on an H-Tree style topology. The inserted buffers are strategically positioned throughout the layout so that the clock signal reaches all sequential elements with minimal skew and balanced delay.
 
 Each clock buffer acts as an intermediate driver, dividing the clock load into smaller branches and reducing excessive fanout on any single clock net.
@@ -411,9 +405,6 @@ Each clock buffer acts as an intermediate driver, dividing the clock load into s
 The physical placement of clock buffers is one of the key reasons CTS improves timing performance.
 
 Instead of allowing one clock source to drive thousands of flip-flops directly, the H-Tree based clock network distributes the clock through multiple buffer stages, creating a more balanced clock arrival time across the entire design.
-
-This balanced distribution helps reduce clock skew, improves timing predictability, and enables the clock network to reliably drive all 1613 clock sinks present in the design.
-
 ---
 
 # Final Thoughts
