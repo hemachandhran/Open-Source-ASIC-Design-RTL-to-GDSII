@@ -147,26 +147,6 @@ set ::env(SYNTH_STRATEGY) "AREA 0"
 
 This configuration directs the synthesis engine to minimize silicon area during technology mapping.
 
----
-
-## Modified Synthesis Configuration
-
-To evaluate potential timing improvements, the synthesis strategy was changed to:
-
-```tcl
-set ::env(SYNTH_STRATEGY) "DELAY 0"
-```
-
-This configuration instructs the synthesis engine to prioritize timing optimization over area reduction, allowing faster implementations of critical logic paths to be selected.
-
----
-
-## Strategy Comparison
-
-| Strategy  | Primary Goal        | Expected Behavior                                                |
-| --------- | ------------------- | ---------------------------------------------------------------- |
-| `AREA 0`  | Area Optimization   | Uses fewer cells and minimizes silicon area                      |
-| `DELAY 0` | Timing Optimization | Uses faster cells and stronger drive strengths to improve timing |
 
 ---
 
@@ -285,7 +265,7 @@ This made it possible to analyze the design under custom timing conditions.
 
 ---
 
-## Fast Corner Analysis
+## Fast Corner Analysis (Hold timing)
 
 Result:
 
@@ -317,7 +297,7 @@ The design comfortably met timing requirements under nominal conditions.
 
 ---
 
-## Slow Corner Analysis
+## Slow Corner Analysis (Setup timing)
 
 Result:
 
@@ -338,11 +318,6 @@ Although OpenLane synthesis STA reported positive slack, the slow process corner
 ## Final OpenSTA Summary
 
 Reported:
-
-```text
-WNS = -10.75 ns
-TNS = -552.47 ns
-```
 
 ![](Screenshots/6.4.png)
 
