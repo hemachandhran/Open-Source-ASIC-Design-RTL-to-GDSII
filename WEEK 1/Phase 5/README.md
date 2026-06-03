@@ -32,12 +32,11 @@ The PDN stage creates dedicated power rails and power straps that distribute pow
 ```tcl
 gen_pdn
 ```
-
+![](Screenshots/1.png)
 ### Observation
 
 The PDN generation stage completed successfully and OpenLane began creating the power delivery infrastructure for the design.
 
-![](Screenshots/1.png)
 
 ### Learning
 
@@ -48,6 +47,8 @@ Power planning is one of the earliest signoff-oriented activities in physical de
 ## PDN Report Analysis
 
 After generating the PDN, the generated log file was inspected to understand what OpenROAD created internally.
+
+![PDN Report](Screenshots/2.png)
 
 ### Observation
 
@@ -61,7 +62,7 @@ The report showed:
 
 The report confirmed that all power stripes were successfully connected and that the generated power network was electrically complete.
 
-![PDN Report](Screenshots/2.png)
+
 
 ### Learning
 
@@ -96,13 +97,15 @@ The PDN acts as the electrical backbone of the entire chip and must be completed
 
 After PDN generation, the layout was inspected inside Magic.
 
+![Standard Cells on Rails](Screenshots/4.png)
+
 ### Observation
 
 The standard cells were observed to be perfectly aligned along the generated power rails.
 
 This arrangement is intentional. Standard cells are designed with fixed heights so that their power pins naturally align with the horizontal VDD and GND rails generated during floorplanning and PDN creation.
 
-![Standard Cells on Rails](Screenshots/4.png)
+
 
 ### Learning
 
@@ -113,6 +116,8 @@ The regular row-based arrangement simplifies routing while ensuring consistent p
 ## Beginning the Routing Stage
 
 With power planning completed, routing could begin.
+
+![Routing Stage Start](Screenshots/5.png)
 
 ### Observation
 
@@ -140,7 +145,6 @@ Routing behavior can also be influenced through several OpenLane routing paramet
 
 Changing these settings can significantly affect congestion, timing closure, runtime, and routing quality.
 
-![Routing Stage Start](Screenshots/5.png)
 
 ### Learning
 
@@ -151,6 +155,8 @@ Routing is not a fixed process. Different routing strategies can produce differe
 ## Routing Report Analysis
 
 Before routing proceeded further, the routing report was examined.
+
+![Routing Report](Screenshots/6.png)
 
 ### Observation
 
@@ -166,8 +172,6 @@ The report contained useful design statistics including:
 
 These statistics provide an estimate of routing complexity and resource utilization.
 
-![Routing Report](Screenshots/6.png)
-
 ### Learning
 
 As design size increases, routing complexity grows significantly due to the increasing number of nets competing for limited routing resources.
@@ -177,6 +181,8 @@ As design size increases, routing complexity grows significantly due to the incr
 ## Global Routing and Detailed Routing
 
 Routing is divided into two major stages.
+
+![Routing Overview](Screenshots/7.png)
 
 ### Global Routing (FastRoute)
 
@@ -200,8 +206,6 @@ Objectives:
 - Satisfy design rules
 - Minimize violations
 - Optimize wire and via usage
-
-![Routing Overview](Screenshots/7.png)
 
 ### Learning
 
@@ -247,13 +251,13 @@ TritonRoute transforms abstract routing guides into manufacturable physical conn
 
 After routing completed successfully, the routed layout was inspected inside Magic.
 
+![Full Routed Layout](Screenshots/10.0.png)
+
 ### Observation
 
 The design now contained actual signal interconnections distributed across multiple metal layers.
 
 Signals were routed across the core using a combination of horizontal and vertical metal layers connected through vias. The routing fabric occupied a significant portion of the design area, indicating the complexity of the PicoRV32A processor.
-
-![Full Routed Layout](Screenshots/10.0.png)
 
 ### Learning
 
@@ -265,13 +269,13 @@ Routing converts logical connectivity into physical metal structures that can ev
 
 A closer inspection of the routed layout was performed.
 
+![Zoomed Routed Layout](Screenshots/10.1.png)
+
 ### Observation
 
 At higher magnification, routing tracks, vias, filler cells, decap cells, standard cells, and power structures became visible.
 
 The dense interconnect network demonstrates how multiple metal layers work together to satisfy timing and connectivity requirements while respecting design-rule constraints.
-
-![Zoomed Routed Layout](Screenshots/10.1.png)
 
 ### Learning
 
@@ -332,20 +336,26 @@ The generated GDSII file represents the final manufacturable version of the desi
 
 ---
 
-## Conclusion
+# Final Thoughts
 
-This phase provided insight into how physical connectivity is established inside an ASIC design.
+This phase helped in understanding:
 
-The Power Distribution Network ensured reliable delivery of power and ground throughout the core, while the routing stages transformed logical connectivity into physical metal interconnections. The study of FastRoute and TritonRoute also provided a deeper understanding of how modern routing engines manage congestion, connectivity, and design-rule constraints.
-
-One important takeaway from this phase was realizing how iterative the physical design flow truly is. A small issue in floorplanning, placement, CTS, or routing can easily force multiple optimization cycles before a design becomes signoff-ready.
+- Power Distribution Network (PDN) planning
+- Power rings, straps, and standard-cell rails
+- PDN generation using OpenROAD
+- Routing guides and connectivity constraints
+- Antenna protection mechanisms
+- Parasitic extraction (SPEF) concepts
+- Post-routing timing analysis workflow
+- Physical verification flow (DRC, LVS, and GDSII signoff)
 
 ---
-## Personal View
 
-Working through the complete PDN and routing flow on PicoRV32A offered valuable exposure to concepts used in industrial backend design tools. OpenLane provides a practical platform for understanding modern physical implementation methodologies and serves as an excellent bridge toward advanced timing closure and signoff verification workflows.
+## Biggest Takeaway
 
-The journey from RTL to silicon is long, but completing this stage provided a much deeper appreciation of how physical structures ultimately become a manufacturable integrated circuit.
+The journey from RTL to silicon is long and highly iterative. A small issue introduced during floorplanning, placement, CTS, PDN, or routing can propagate through later stages and require multiple optimization cycles before signoff.
+
+Working through the complete PDN and routing flow on PicoRV32A provided valuable exposure to industry-style backend implementation methodologies and offered a deeper appreciation of how logical connectivity is transformed into a manufacturable integrated circuit.
 
 ---
 
