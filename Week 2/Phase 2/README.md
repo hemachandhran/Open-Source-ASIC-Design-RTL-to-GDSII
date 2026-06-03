@@ -1,4 +1,4 @@
-# Phase 2 – Understanding the ORFS Toolchain and Flow Architecture
+# Understanding the ORFS Toolchain and Flow Architecture
 
 ---
 
