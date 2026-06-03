@@ -12,13 +12,29 @@ By analyzing the Dockerfile and installation scripts, I was able to understand t
 
 ---
 
+# Understanding the Dev Container Architecture
+
+![](Screenshots/c.webp)
+
+### Observation
+
+Before analyzing the ORFS toolchain, I first studied how the GitHub Codespaces development environment is organized.
+
+The VS Code project is connected to a Docker-based Dev Container through configuration files such as `settings.json` and `devcontainer.json`. These files define the development environment, installed tools, extensions, and container settings required by the project.
+
+An interesting observation was that the project files remain in the local workspace while the actual execution environment exists inside the container. This allows ORFS and its dependencies to run in a consistent environment regardless of the host operating system.
+
+The mounted folder mechanism also ensures that any files created inside the container are immediately accessible from the VS Code workspace, making development and experimentation seamless.
+
+---
+
 # Analyzing the Dockerfile Configuration
 
 The Dockerfile defines the complete development environment used by GitHub Codespaces.
 
-![](Screenshots/1_dockerfile_part1.png)
+![](Screenshots/a.png)
 
-![](Screenshots/2_dockerfile_part2.png)
+![](Screenshots/a1.png)
 
 ### Observation
 
@@ -36,9 +52,9 @@ The Dockerfile also configures locale settings, environment variables, OSS CAD S
 
 The install-openroad.sh script is responsible for downloading and configuring the OpenROAD binary inside the container.
 
-![](Screenshots/3_install_openroad_part1.png)
+![](Screenshots/b.png)
 
-![](Screenshots/4_install_openroad_part2.png)
+![](Screenshots/b1.png)
 
 ### Observation
 
@@ -94,84 +110,31 @@ Instead of performing synthesis, placement, routing, and timing analysis itself,
 
 ---
 
-# Flow Organization
+# 1.	What ORFS automates?
 
-### Observation
-
-The implementation flow is divided into several major stages:
-
-1. Synthesis
-2. Floorplanning
-3. Power Planning
-4. Placement
-5. Clock Tree Synthesis
-6. Routing
-7. Timing Analysis
-8. Final GDS Generation
-
-Each stage generates intermediate databases, reports, and configuration files that are consumed by subsequent stages.
-
-This modular structure makes debugging easier because issues can be isolated to specific stages of the implementation process.
 
 ---
 
-# How Makefiles Control the Flow
+# 2. How Makefiles orchestrate the flow?
 
-### Observation
 
-The Makefile serves as the central controller for the entire implementation process.
-
-Executing:
-
-```bash
-make DESIGN_CONFIG=./designs/sky130hd/gcd/config.mk
-```
-
-automatically launches all required stages in the correct sequence.
-
-The Makefile handles dependencies, file generation, report creation, and execution order without requiring manual intervention.
-
-This demonstrates how ORFS achieves automation while still maintaining a structured and reproducible design flow.
 
 ---
 
-# Transition from Logical Design to Physical Design
+# 3.	Where synthesis ends and physical design begins?
 
-### Observation
-
-The synthesis stage represents the boundary between logical design and physical design.
-
-During synthesis, RTL code is transformed into a gate-level netlist using standard-cell libraries.
-
-Once synthesis is complete, OpenROAD begins operating on physical information such as cell dimensions, placement coordinates, routing resources, clock networks, and technology layers.
-
-This transition highlights the difference between describing functionality and implementing functionality in silicon.
 
 ---
 
-# Timing Analysis in the Flow
+# 4.	Where timing is checked?
 
-### Observation
 
-Timing analysis is not performed only at the end of the flow.
-
-OpenSTA is continuously used throughout implementation to evaluate timing after synthesis, placement, CTS, and routing.
-
-This allows timing issues to be identified and corrected before they become difficult to fix in later stages.
-
-The repeated use of timing analysis illustrates its importance in achieving timing closure.
 
 ---
 
-# Final GDS Generation
+# 5.	Where GDS is produced?
 
-### Observation
 
-The final stage of the flow converts the completed physical implementation into a GDSII layout.
-
-This GDS file contains all geometric information required for fabrication, including standard cells, routing layers, vias, power structures, and clock networks.
-
-The GDS output represents the final result of the entire RTL-to-GDS implementation process.
 
 ---
 
@@ -193,19 +156,11 @@ ORFS achieves this by combining containerization, automated installation, enviro
 
 # Tools Used
 
-* Dockerfile
-* GitHub Codespaces
-* OpenROAD Flow Scripts (ORFS)
-* OpenROAD
-* Yosys
-* OpenSTA
-* TritonCTS
-* FastRoute
-* KLayout
-* Magic
-* Netgen
-* Icarus Verilog
-* GTKWave
-* Python
-* GNU Make
-* Git
+* **GitHub Codespaces** – Cloud-based development environment
+* **Docker / Dev Containers** – Provides an isolated and reproducible ASIC toolchain environment
+* **Dockerfile** – Defines the container setup and installed dependencies
+* **OpenROAD Flow Scripts (ORFS)** – Automates the complete RTL-to-GDSII flow
+* **OpenROAD** – Physical design engine used for floorplanning, placement, CTS, routing, and reporting
+* **Python** – Used for automation and flow scripting
+* **GNU Make** – Orchestrates the execution flow through Makefiles
+* **Git** – Version control and repository management
