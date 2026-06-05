@@ -212,7 +212,7 @@ These images were generated automatically by ORFS/OpenROAD during report generat
 
 ---
 
-## Final Thoughts
+# Final Thoughts
 
 This phase provided practical exposure to the complete RTL-to-GDS implementation process using OpenROAD Flow Scripts.
 
