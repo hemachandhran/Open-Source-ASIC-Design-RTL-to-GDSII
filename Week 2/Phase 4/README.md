@@ -21,7 +21,7 @@ The GCD design available under the Sky130HD platform was selected and the flow w
 
 ![](Screenshots/1.png)
 
-The make command involes the makefile which runs the flow as defined.
+The make command invokes the makefile which contains all the scripts to run the flow as defined.
 
 ---
 
@@ -225,12 +225,14 @@ Executing ORFS locally requires more setup effort than using a cloud environment
 
 # Tools Used
 
-- OpenROAD Flow Scripts (ORFS)
-- OpenROAD
-- Yosys
-- OpenSTA
-- TritonCTS
-- FastRoute
-- GNU Make
-- Sky130HD PDK
-- Ubuntu Linux
+* **OpenROAD Flow Scripts (ORFS)** – Complete RTL-to-GDSII Flow
+* **OpenROAD** – Physical Design Engine
+* **Yosys** – Logic Synthesis
+* **OpenSTA** – Static Timing Analysis
+* **TritonCTS** – Clock Tree Synthesis
+* **FastRoute** – Routing Engine
+* **KLayout** – GDSII Visualization
+* **Sky130HD PDK** – Process Design Kit
+* **GitHub Codespaces** – Cloud Development Environment
+* **GNU Make** – Flow Automation
+* **Python** – Script Execution Support
