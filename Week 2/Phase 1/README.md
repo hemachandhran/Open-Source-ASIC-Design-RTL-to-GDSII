@@ -212,11 +212,13 @@ These images were generated automatically by ORFS/OpenROAD during report generat
 
 ---
 
-# Final Thoughts
+## Final Thoughts
 
 This phase provided practical exposure to the complete RTL-to-GDS implementation process using OpenROAD Flow Scripts.
 
 Observing synthesis, floorplanning, PDN generation, placement, clock tree synthesis, routing, timing analysis, and final layout generation helped connect individual backend concepts into a single implementation pipeline. The generated reports also demonstrated how heavily ASIC design relies on quantitative analysis and iterative optimization.
+
+---
 
 ## Biggest Takeaway
 
