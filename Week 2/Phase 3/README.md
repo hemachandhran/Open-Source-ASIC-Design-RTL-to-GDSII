@@ -20,47 +20,60 @@ Unlike the containerized workflow, this phase exposed the internal build process
 
 ---
 
-# Verifying the ORFS Docker Environment
+## Understanding the Existing OpenROAD Environment
 
-Before starting the native build, the existing ORFS Docker environment was inspected.
+Before building OpenROAD from source, the existing ORFS environment was examined to understand how OpenROAD was being provided and whether it could be installed directly on the local machine.
+
+### Checking the Host System
+
+The local Ubuntu environment was checked to verify whether OpenROAD was already installed.
 
 ![](Screenshots/1.png)
 
+The following commands were executed:
+
+```bash
+which openroad
+openroad --version
+```
+
+The output showed that OpenROAD was not available on the host system.
+
+### Attempting Native Installation
+
+A native installation was then attempted using the VSD installation script.
+
 ![](Screenshots/2.png)
 
-### Observation
+The installer successfully downloaded and extracted the OpenROAD package and began the installation process.
 
-The Docker environment successfully provided:
+### Installation Failure
 
-* OpenROAD
-* Yosys
-* GNU Make
-* Flow automation scripts
-
-The OpenROAD binary was available inside the container and could be executed immediately without any local installation effort.
-
-This demonstrated the convenience of containerized environments for rapid deployment and experimentation.
-
----
-
-# Attempting Native Installation
-
-The VSD installation script was tested to install OpenROAD directly on the local machine.
+During installation, several required shared libraries were found to be missing.
 
 ![](Screenshots/3.png)
+
+Missing dependencies included Qt and Python runtime libraries, preventing OpenROAD from running correctly on the local system.
+
+### Verifying the ORFS Docker Environment
+
+Since the native installation was unsuccessful, the ORFS Docker environment was inspected.
+
 ![](Screenshots/4.png)
+
+Inside the Docker container, OpenROAD and Yosys were immediately available and working without any additional setup.
 
 ### Observation
 
-The installation process failed due to unresolved shared-library dependencies.
+This experiment demonstrated the difference between native and containerized installations.
 
-Missing libraries included:
+| Environment                 | OpenROAD Status |
+| --------------------------- | --------------- |
+| Host Ubuntu                 | Not Installed   |
+| Native Installation Attempt | Failed          |
+| ORFS Docker Container       | Working         |
 
-* Qt5 components
-* Python shared libraries
-* Tcl/Tk libraries
-
-This highlighted one of the challenges of distributing large EDA applications outside containerized environments.
+The ORFS Docker environment provided a fully configured OpenROAD setup with all required dependencies already installed, while native installation required additional dependency management.
 
 ---
 
@@ -231,22 +244,6 @@ During the setup process, several issues were identified and resolved:
 
 These debugging activities provided practical exposure to Linux-based software development and dependency management, which are essential skills when working with EDA toolchains.
 
----
-
-# Runtime Comparison
-
-| Metric                | Docker ORFS   | Native OpenROAD Build |
-| --------------------- | ------------- | --------------------- |
-| Installation Time     | Few minutes   | Several hours         |
-| Setup Complexity      | Low           | High                  |
-| Dependency Management | Automatic     | Manual                |
-| Debugging Required    | Minimal       | Extensive             |
-| Tool Access           | Containerized | Native                |
-| Learning Value        | Moderate      | High                  |
-
-### Observation
-
-The Docker environment offered convenience and reproducibility, while the native build provided significantly deeper insight into the OpenROAD architecture and build process.
 
 ---
 
@@ -257,6 +254,8 @@ This phase provided valuable exposure to the internal structure of the OpenROAD 
 Rather than using a preconfigured environment, building OpenROAD from source required understanding dependency management, Linux package installation, environment variables, Git submodules, and software compilation workflows.
 
 The experience demonstrated that modern EDA tools are large software systems whose successful deployment depends as much on system configuration as on design knowledge.
+
+---
 
 ## Biggest Takeaway
 
@@ -284,11 +283,3 @@ Successfully compiling OpenROAD from source transformed the tool from a black-bo
 * **Ubuntu 24.04** – Development Platform
 * **Docker** – Containerized Execution Environment
 * **GitHub** – Source Repository Hosting
-
----
-
-# Learning Experience
-
-This phase went beyond simply using OpenROAD and focused on understanding how professional EDA tools are deployed and maintained.
-
-Working through dependency installation, version conflicts, Git submodules, environment variables, and source compilation provided valuable Linux and software-engineering experience that complements backend VLSI knowledge. The process reinforced the importance of debugging skills and showed how much infrastructure exists beneath a single executable such as OpenROAD.
