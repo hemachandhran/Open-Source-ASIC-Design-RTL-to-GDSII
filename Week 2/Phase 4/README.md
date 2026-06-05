@@ -233,6 +233,5 @@ Executing ORFS locally requires more setup effort than using a cloud environment
 * **FastRoute** – Routing Engine
 * **KLayout** – GDSII Visualization
 * **Sky130HD PDK** – Process Design Kit
-* **GitHub Codespaces** – Cloud Development Environment
 * **GNU Make** – Flow Automation
-* **Python** – Script Execution Support
+* **Python** – Automation and Tool Support Scripts
