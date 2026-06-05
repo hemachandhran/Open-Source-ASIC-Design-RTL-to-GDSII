@@ -21,13 +21,7 @@ The GCD design available under the Sky130HD platform was selected and the flow w
 
 ![](Screenshots/1.png)
 
-The flow was started using:
-
-```bash
-make DESIGN_CONFIG=./designs/sky130hd/gcd/config.mk
-```
-
-Initially, ORFS could not locate the expected Yosys executable path. After correcting the environment setup and dependency installation, the flow executed successfully.
+The make command involes the makefile which runs the flow as defined.
 
 ---
 
@@ -36,11 +30,6 @@ Initially, ORFS could not locate the expected Yosys executable path. After corre
 The first stage of the flow converted the RTL design into a gate-level netlist using Yosys and the Sky130HD standard-cell library.
 
 ![](Screenshots/2.png)
-
-Key outputs generated:
-
-- `1_synth.odb`
-- `1_synth.sdc`
 
 ### Result
 
@@ -170,27 +159,24 @@ These reports indicate that timing analysis was successfully completed and timin
 
 ---
 
-# Final GDSII Generation
+# Final GDSII Generation and Layout Visualization
 
-The final layout database was converted into a manufacturable GDSII file.
+After routing and signoff checks, ORFS generated the final GDSII layout database.
 
 ![](Screenshots/8.png)
 
-### Result
-
-ORFS successfully generated:
+The generated output file was:
 
 ```text
-6_final.gds
+results/sky130hd/gcd/base/6_final.gds
 ```
 
-The logs confirmed:
+The GDS file was successfully opened in KLayout to verify that the physical layout had been generated correctly.
 
-- All LEF cells matched GDS cells
-- No orphan cells were present
-- Final layout merge completed successfully
+![](Screenshots/11.png)
 
-This marks the completion of the RTL-to-GDSII flow.
+The successful visualization of `6_final.gds` in KLayout verified that the locally executed ORFS flow produced a valid manufacturable layout database.
+
 
 ---
 
@@ -200,18 +186,6 @@ The final ORFS report listed all major stage outputs generated during execution.
 
 ![](Screenshots/10.png)
 
-Generated stages included:
-
-- Synthesis
-- Floorplan
-- PDN
-- Placement
-- CTS
-- Routing
-- Fill Cell Insertion
-- Final Merge
-- Reporting
-
 This confirms that the complete RTL-to-GDS implementation flow executed successfully on the local machine.
 
 ---
@@ -220,11 +194,7 @@ This confirms that the complete RTL-to-GDS implementation flow executed successf
 
 | Metric | Cloud | Local |
 |----------|----------|----------|
-| Synthesis | Completed | Completed |
-| Floorplan | Completed | Completed |
-| Placement | Completed | Completed |
-| CTS | Completed | Completed |
-| Routing | Completed | Completed |
+| Runtime | 5m:39s | 4m:14s |
 | GDS Generated | Yes | Yes |
 | WNS | -2.19 ns | -1.77 ns |
 | TNS | -92.21 ns | -85.06 ns |
