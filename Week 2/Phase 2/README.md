@@ -143,13 +143,15 @@ GDS (Graphic design system) is produced at the final step of the flow after rout
 
 ---
 
-# Final Thoughts
+## Final Thoughts
 
 This phase helped me understand that ORFS is much more than a collection of EDA tools.
 
 The Dockerfile, installation scripts, and Makefile infrastructure work together to create a reproducible ASIC development environment where multiple specialized tools can operate as a single integrated flow.
 
 Studying the supporting infrastructure provided valuable insight into how modern digital implementation environments are assembled and maintained.
+
+---
 
 ## Biggest Takeaway
 
