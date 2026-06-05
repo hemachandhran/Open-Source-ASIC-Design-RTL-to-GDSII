@@ -14,7 +14,10 @@ By analyzing the Dockerfile and installation scripts, I was able to understand t
 
 # Understanding the Dev Container Architecture
 
-![](Screenshots/c.webp)
+<p align="center">
+<img src="Screenshots/c.webp" width="350">
+ 
+</p>
 
 ### Observation
 
