@@ -143,7 +143,7 @@ GDS (Graphic design system) is produced at the final step of the flow after rout
 
 ---
 
-## Final Thoughts
+# Final Thoughts
 
 This phase helped me understand that ORFS is much more than a collection of EDA tools.
 
