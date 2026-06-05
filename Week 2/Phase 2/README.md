@@ -110,31 +110,33 @@ Instead of performing synthesis, placement, routing, and timing analysis itself,
 
 ---
 
-# 1.	What ORFS automates?
+## 1.	What does ORFS automates?
 
-
----
-
-# 2. How Makefiles orchestrate the flow?
-
-
+OpenROAD Flow Scripts uses lots of commands and scripts to automate the entire RTL-GDSII flow and executes them in correct order. Without ORFS we would be executing each and every step individually like we did in openlane interactive flow.
 
 ---
 
-# 3.	Where synthesis ends and physical design begins?
+## 2. How do Makefiles orchestrate the flow?
 
-
----
-
-# 4.	Where timing is checked?
-
-
+The Makefiles orchestrates the design flow by defining the correct sequence of execution by invoking the right tools in the right order and it also defines where the output of each step has to be stored.
 
 ---
 
-# 5.	Where GDS is produced?
+## 3.	Where does synthesis ends and physical design begins?
 
+Synthesis ends when RTL is converted into gate level netlist and physical design begins with floorplanning which decides the core & die area and maps the netlist into the chip layout.
 
+---
+
+## 4.	Where is timing checked?
+
+Timing is checked using Static Timing Analysis (STA) in every step of the flow i.e., after synthesis, placement, CTS, and routing, with final timing signoff performed after routing.
+
+---
+
+## 5.	Where is GDS produced?
+
+GDS (Graphic design system) is produced at the final step of the flow after routing and Design rule checks are done. This is the file which will be sent for fabricaition.
 
 ---
 
