@@ -48,6 +48,7 @@ This demonstrated the convenience of containerized environments for rapid deploy
 The VSD installation script was tested to install OpenROAD directly on the local machine.
 
 ![](Screenshots/3.png)
+![](Screenshots/4.png)
 
 ### Observation
 
@@ -67,9 +68,9 @@ This highlighted one of the challenges of distributing large EDA applications ou
 
 To perform a complete local build, the OpenROAD source repository was cloned from GitHub.
 
-![](Screenshots/4.png)
-
 ![](Screenshots/5.png)
+
+![](Screenshots/6.png)
 
 ### Observation
 
@@ -89,11 +90,11 @@ This provided access to the complete OpenROAD development environment.
 
 The dependency installation scripts supplied by OpenROAD were executed.
 
-![](Screenshots/6.png)
-
 ![](Screenshots/7.png)
 
 ![](Screenshots/8.png)
+
+![](Screenshots/9.png)
 
 ### Observation
 
@@ -117,9 +118,8 @@ This stage demonstrated how modern EDA tools depend on a large ecosystem of supp
 
 The first build attempt did not complete successfully.
 
-![](Screenshots/9.png)
-
 ![](Screenshots/10.png)
+![](Screenshots/11.png)
 
 ### Observation
 
@@ -141,7 +141,7 @@ This introduced an important debugging exercise involving environment variables 
 
 The SWIG installation was investigated and corrected.
 
-![](Screenshots/11.png)
+![](Screenshots/12.png)
 
 ### Observation
 
@@ -161,9 +161,8 @@ This demonstrated how build systems rely on the executable discovered through th
 
 After resolving dependency and path issues, the OpenROAD build process was restarted.
 
-![](Screenshots/12.png)
-
 ![](Screenshots/13.png)
+![](Screenshots/14.png)
 
 ### Observation
 
@@ -189,8 +188,6 @@ The long build duration highlighted the scale and complexity of a modern open-so
 # Verifying the Generated Binary
 
 Once compilation completed, the generated executable was verified.
-
-![](Screenshots/14.png)
 
 ![](Screenshots/15.png)
 
