@@ -1,30 +1,53 @@
-# Phase 4 — Verification Flow Understanding
+# Verification Flow Understanding
 
-## Verification Methodology
+### 1. What happens when `make` is executed?
+
+When the `make` command is executed, the Makefile automatically performs all steps required for verification. It compiles the firmware, generates the HEX memory image, compiles the RTL design and testbench, runs the simulation, and generates the final output files such as waveforms and reports.
+
+---
+
+### 2. How does the Makefile invoke the simulator?
+
+The Makefile uses **Icarus Verilog (`iverilog`)** to compile the RTL design and testbench into a simulation executable (`.vvp` file). The generated executable is then run using **`vvp`**, which starts the simulation and executes the verification test.
+
+---
+
+### 3. What files are compiled?
+
+The following files are compiled during verification:
+
+* Firmware source file (`.c`)
+* Startup assembly file (`.s`)
+* Linker script (`.lds`)
+* RTL design files (`.v`)
+* Testbench files (`_tb.v`)
+
+Generated files include:
+
+* `.elf` (firmware executable)
+* `.hex` (memory image)
+* `.vvp` (simulation executable)
+* `.vcd` (waveform file)
+* `.lst` (disassembly listing)
+
+---
+
+### 4. How does the testbench interact with the design?
+
+The testbench instantiates the DUT (Design Under Test), provides clock and reset signals, loads the firmware into memory, applies test stimuli, monitors DUT outputs, and checks whether the design behaves as expected during simulation.
+
+---
+
+### 5. How is PASS/FAIL determined?
+
+The testbench continuously monitors DUT outputs and verification checkpoints during simulation. The observed results are compared against the expected values defined in the test. If all checks pass successfully, a **PASS** message is displayed. If any mismatch or unexpected behavior is detected, the simulation reports a **FAIL** result.
+
+
+# Verification Methodology
 
 All verification tests follow a similar workflow. When `make` is executed, the firmware source code is first compiled into a HEX file using the RISC-V GCC compiler. The RTL design and testbench are then compiled using Icarus Verilog (`iverilog`). The simulation executable is run using `vvp`, which loads the firmware into memory and executes the test.
 
 During simulation, the testbench interacts with the Design Under Test (DUT) by applying inputs, monitoring outputs, and checking expected behavior. Based on the verification conditions defined in the testbench, the simulation reports either a PASS or FAIL result.
-
-General verification flow:
-
-```text
-Makefile
-    ↓
-Firmware Compilation (.c → .hex)
-    ↓
-RTL + Testbench Compilation (iverilog)
-    ↓
-Simulation (vvp)
-    ↓
-DUT Operation Verification
-    ↓
-Testbench Verification
-    ↓
-PASS / FAIL Result
-```
-
----
 
 # Debug Verification Flow
 
@@ -32,7 +55,9 @@ The debug test verifies the functionality of the debug interface and ensures tha
 
 ![Debug Verification Flow](Diagrams/debug_flow.png)
 
+
 ---
+
 
 # GPIO Verification Flow
 
