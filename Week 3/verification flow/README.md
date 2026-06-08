@@ -42,6 +42,7 @@ The testbench instantiates the DUT (Design Under Test), provides clock and reset
 
 The testbench continuously monitors DUT outputs and verification checkpoints during simulation. The observed results are compared against the expected values defined in the test. If all checks pass successfully, a **PASS** message is displayed. If any mismatch or unexpected behavior is detected, the simulation reports a **FAIL** result.
 
+---
 
 # Verification Methodology
 
@@ -49,7 +50,7 @@ All verification tests follow a similar workflow. When `make` is executed, the f
 
 During simulation, the testbench interacts with the Design Under Test (DUT) by applying inputs, monitoring outputs, and checking expected behavior. Based on the verification conditions defined in the testbench, the simulation reports either a PASS or FAIL result.
 
-# Debug Verification Flow
+## Debug Verification Flow
 
 The debug test verifies the functionality of the debug interface and ensures that debug-related checkpoints are correctly detected by the verification environment.
 
@@ -59,7 +60,7 @@ The debug test verifies the functionality of the debug interface and ensures tha
 ---
 
 
-# GPIO Verification Flow
+## GPIO Verification Flow
 
 The GPIO test verifies that GPIO pins can be configured and toggled correctly, and that the expected output states are observed during simulation.
 
@@ -67,7 +68,7 @@ The GPIO test verifies that GPIO pins can be configured and toggled correctly, a
 
 ---
 
-# Housekeeping SPI (HKSPI) Verification Flow
+## Housekeeping SPI (HKSPI) Verification Flow
 
 The HKSPI test verifies access to housekeeping SPI registers and ensures proper communication through the housekeeping SPI interface.
 
@@ -75,7 +76,7 @@ The HKSPI test verifies access to housekeeping SPI registers and ensures proper 
 
 ---
 
-# Housekeeping SPI Power Verification Flow
+## Housekeeping SPI Power Verification Flow
 
 The HKSPI Power test verifies power-management related operations controlled through the housekeeping SPI interface.
 
@@ -83,7 +84,7 @@ The HKSPI Power test verifies power-management related operations controlled thr
 
 ---
 
-# IRQ Verification Flow
+## IRQ Verification Flow
 
 The IRQ test verifies interrupt generation, interrupt detection, and correct interrupt handling by the processor.
 
@@ -91,7 +92,7 @@ The IRQ test verifies interrupt generation, interrupt detection, and correct int
 
 ---
 
-# Memory Verification Flow
+## Memory Verification Flow
 
 The memory test verifies memory write and read operations and confirms that stored data can be retrieved correctly.
 
@@ -99,7 +100,7 @@ The memory test verifies memory write and read operations and confirms that stor
 
 ---
 
-# Pass-Through Verification Flow
+## Pass-Through Verification Flow
 
 The pass-through test verifies that signals are correctly routed through the pass-through logic without corruption or modification.
 
@@ -107,7 +108,7 @@ The pass-through test verifies that signals are correctly routed through the pas
 
 ---
 
-# PLL Verification Flow
+## PLL Verification Flow
 
 The PLL test verifies clock generation and confirms that the PLL produces the expected clock behavior during simulation.
 
@@ -115,7 +116,7 @@ The PLL test verifies clock generation and confirms that the PLL produces the ex
 
 ---
 
-# SPI Master Verification Flow
+## SPI Master Verification Flow
 
 The SPI Master test verifies communication between the SPI Master peripheral and the SPI Flash model by performing SPI read transactions.
 
@@ -123,7 +124,7 @@ The SPI Master test verifies communication between the SPI Master peripheral and
 
 ---
 
-# SRAM Execution Verification Flow
+## SRAM Execution Verification Flow
 
 The SRAM execution test verifies that program code can be executed directly from SRAM and that execution proceeds correctly.
 
@@ -131,7 +132,7 @@ The SRAM execution test verifies that program code can be executed directly from
 
 ---
 
-# System Controller Verification Flow
+## System Controller Verification Flow
 
 The System Controller test verifies system control functionality and ensures correct operation of system management features.
 
@@ -139,7 +140,7 @@ The System Controller test verifies system control functionality and ensures cor
 
 ---
 
-# Timer Verification Flow
+## Timer Verification Flow
 
 The timer test verifies timer operation, timer expiry events, and proper timing behavior during simulation.
 
@@ -147,7 +148,7 @@ The timer test verifies timer operation, timer expiry events, and proper timing 
 
 ---
 
-# UART Verification Flow
+## UART Verification Flow
 
 The UART test verifies UART transmit and receive operations and confirms successful serial communication.
 
@@ -155,7 +156,7 @@ The UART test verifies UART transmit and receive operations and confirms success
 
 ---
 
-# Pull-Up / Pull-Down Verification Flow
+## Pull-Up / Pull-Down Verification Flow
 
 The pull-up/pull-down test verifies GPIO pull configuration behavior and ensures that pull-up and pull-down settings operate correctly.
 
