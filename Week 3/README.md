@@ -1,6 +1,11 @@
 # Block-Level Verification of VSDSquadron SoC
 
-This repository documents my journey of understanding, executing, analyzing, and documenting the block-level verification flow of the VSDSquadron SoC using both Standalone and Caravel-integrated verification environments.
+This repository documents my journey of understanding, executing, analyzing, and documenting the block-level verification flow of the VSDSquadron SoC in two levels:
+
+1. **Standalone Verification** – Individual blocks were tested independently to validate their functionality.
+2. **Caravel Integrated Verification** – The same peripherals were verified within the complete SoC environment to study real system interactions.
+
+Through these activities, I gained hands-on experience with firmware compilation, RTL simulation, waveform generation, debugging, PASS/FAIL analysis, and SoC verification methodologies. This provided valuable insight into how modern semiconductor companies validate functional correctness before proceeding to later implementation stages such as synthesis, physical design, and tapeout.
 
 ---
 ## What is VSDSquadron SoC?
@@ -32,15 +37,6 @@ The platform enables engineers to:
 * Analyze interactions between processor, memory, and peripherals.
 * Explore the complete RTL simulation and debugging workflow.
 * Gain practical exposure to open-source silicon development.
-
-## Relevance to Week-3 Activities
-
-During Week-3, the focus was on understanding and executing the verification infrastructure provided by the VSDSquadron SoC environment. Verification was performed at two levels:
-
-1. **Standalone Verification** – Individual blocks were tested independently to validate their functionality.
-2. **Caravel Integrated Verification** – The same peripherals were verified within the complete SoC environment to study real system interactions.
-
-Through these activities, I gained hands-on experience with firmware compilation, RTL simulation, waveform generation, debugging, PASS/FAIL analysis, and SoC verification methodologies. This provided valuable insight into how modern semiconductor companies validate functional correctness before proceeding to later implementation stages such as synthesis, physical design, and tapeout.
 
 ---
 
