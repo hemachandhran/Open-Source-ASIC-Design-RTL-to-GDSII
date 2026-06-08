@@ -44,7 +44,7 @@ Before running the simulation, the contents of the directory were examined.
 
 | File            | Description                                    |
 | --------------- | ---------------------------------------------- |
-| spi_master.c    | Firmware executed by the embedded VexRiscv CPU |
+| spi_master.c    | Firmware to be executed by the embedded VexRiscv CPU |
 | spi_master_tb.v | Verilog testbench                              |
 | Makefile        | Automation script for build and simulation     |
 | spi_master.gtkw | GTKWave configuration                          |
@@ -57,8 +57,6 @@ At this stage only the source files required for simulation were available. No c
 ## Understanding the Makefile
 
 Before running the simulation, the Makefile was studied to understand the verification flow.
-
-### Screenshots
 
 ![Makefile Part 1](Screenshots/makefile1.png)
 
@@ -74,29 +72,13 @@ make
 
 Internally, the flow performs the following operations:
 
-```text
-spi_master.c
-        ↓
-RISC-V GCC Compiler
-        ↓
-spi_master.elf
-        ↓
-objcopy
-        ↓
-spi_master.hex
+The spi_master.c firmware was compiled using the RISC-V GCC compiler to generate a HEX file (spi_master.hex), which is loaded into the simulated memory. 
 
-RTL + Testbench
-        ↓
-iverilog
-        ↓
-spi_master.vvp
+The RTL design, testbench, and firmware were then compiled using Icarus Verilog to create a simulation executable. 
 
-spi_master.vvp
-        ↓
-vvp
-        ↓
-RTL-spi_master.vcd
-```
+Running the simulation allowed the embedded VexRiscv processor to execute the firmware and communicate with the SPI Flash model through the SPI Master peripheral. 
+
+During execution, the testbench verified the received SPI data and generated a waveform file (RTL-spi_master.vcd) for analysis in GTKWave.
 
 ### Generated Files
 
@@ -147,8 +129,6 @@ make clean
 make
 ```
 
-### Screenshots
-
 ![SPI Master Execution 1](Screenshots/spi_master1.png)
 
 ![SPI Master Execution 2](Screenshots/spi_master2.png)
@@ -176,25 +156,7 @@ indicating that all verification checks passed.
 
 The SPI Master test verifies communication between the embedded CPU, SPI Master peripheral, and SPI Flash model.
 
-The firmware sends SPI read commands and requests data from predefined flash memory locations.
-
-Expected values returned from the flash include:
-
-```text
-0x93
-0x01
-0x00
-0x13
-0x02
-0x63
-0x57
-0xB5
-0x00
-0x23
-0x20
-```
-
-These values are checked by the testbench during simulation.
+The firmware sends SPI read commands and requests data from predefined flash memory locations and those values are checked by the testbench during simulation.
 
 ### Verification Flow
 
