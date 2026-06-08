@@ -1,4 +1,4 @@
-# Phase 1: Standalone SPI Master Verification
+# Standalone SPI Master Verification
 
 ## Overview
 
@@ -152,31 +152,12 @@ indicating that all verification checks passed.
 
 ---
 
-## Understanding the Verification Flow
+## Makefile Verification Flow
 
-The SPI Master test verifies communication between the embedded CPU, SPI Master peripheral, and SPI Flash model.
+The CPU executes the SPI firmware, communicates with the SPI Flash model through the SPI Master peripheral, and the testbench compares the returned values against expected reference values to determine PASS or FAIL.
 
-The firmware sends SPI read commands and requests data from predefined flash memory locations and those values are checked by the testbench during simulation.
+![SPI Master Waveform](Screenshots/spi_master-flow.png)
 
-### Verification Flow
-
-```text
-SPI Flash Model
-       ↓
-SPI Interface
-       ↓
-SPI Master RTL
-       ↓
-CPU Firmware
-       ↓
-Checkpoint Register
-       ↓
-Testbench Checker
-       ↓
-PASS / FAIL
-```
-
-The testbench compares the values returned from the SPI Flash against the expected reference values and determines whether the test passes or fails.
 
 ---
 
