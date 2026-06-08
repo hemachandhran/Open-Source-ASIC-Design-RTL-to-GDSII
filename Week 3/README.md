@@ -3,6 +3,46 @@
 This repository documents my journey of understanding, executing, analyzing, and documenting the block-level verification flow of the VSDSquadron SoC using both Standalone and Caravel-integrated verification environments.
 
 ---
+## What is VSDSquadron SoC?
+
+The **VSDSquadron SoC** is an educational RISC-V System-on-Chip platform developed by **VLSI System Design (VSD)** to help students and engineers learn modern SoC design, verification, firmware development, and hardware-software interaction. It is built around the **Caravel SoC framework** and incorporates the **VexRISC-V processor**, providing a complete environment for exploring open-source silicon design and verification workflows.
+
+The platform exposes several commonly used peripherals and interfaces such as:
+
+* VexRISC-V Processor
+* SPI Interface
+* UART Interface
+* SRAM and External Flash Memory
+* GPIO Interfaces
+* Housekeeping SPI (HKSPI)
+* PLL and System Control Blocks
+* USB-based Programming through FTDI
+
+These peripherals make the VSDSquadron SoC an ideal platform for learning how different hardware blocks interact within a complete SoC environment.
+
+## Why VSDSquadron SoC?
+
+Learning individual RTL blocks such as UARTs, FIFOs, FSMs, and SPI controllers is important, but real semiconductor products integrate hundreds of such blocks into a single chip. VSDSquadron bridges this gap by providing a realistic SoC environment where these components can be verified and validated together.
+
+The platform enables engineers to:
+
+* Understand SoC-level integration concepts.
+* Learn firmware-driven verification methodologies.
+* Execute standalone and system-level verification tests.
+* Analyze interactions between processor, memory, and peripherals.
+* Explore the complete RTL simulation and debugging workflow.
+* Gain practical exposure to open-source silicon development.
+
+## Relevance to Week-3 Activities
+
+During Week-3, the focus was on understanding and executing the verification infrastructure provided by the VSDSquadron SoC environment. Verification was performed at two levels:
+
+1. **Standalone Verification** – Individual blocks were tested independently to validate their functionality.
+2. **Caravel Integrated Verification** – The same peripherals were verified within the complete SoC environment to study real system interactions.
+
+Through these activities, I gained hands-on experience with firmware compilation, RTL simulation, waveform generation, debugging, PASS/FAIL analysis, and SoC verification methodologies. This provided valuable insight into how modern semiconductor companies validate functional correctness before proceeding to later implementation stages such as synthesis, physical design, and tapeout.
+
+---
 
 ## Phase 1: Standalone SPI Master Verification
 
