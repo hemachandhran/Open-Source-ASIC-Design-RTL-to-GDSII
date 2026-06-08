@@ -156,7 +156,7 @@ indicating that all verification checks passed.
 
 The CPU executes the SPI firmware, communicates with the SPI Flash model through the SPI Master peripheral, and the testbench compares the returned values against expected reference values to determine PASS or FAIL.
 
-![SPI Master Waveform](Screenshots/spi_master-flow.png)
+![SPI Master Waveform](Screenshots/spi_master_flow.png)
 
 
 ---
@@ -262,11 +262,7 @@ is printed and the simulation terminates successfully.
 
 ---
 
-## Result
-
-| Test                               | Status |
-| ---------------------------------- | ------ |
-| SPI Master Standalone Verification | PASS   |
+## Conclusion
 
 This phase provided a complete understanding of the standalone verification flow, firmware execution process, Makefile automation, waveform analysis, and SPI Master verification methodology used within the VSDSquadron SoC environment.
 
