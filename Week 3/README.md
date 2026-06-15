@@ -42,7 +42,7 @@ The platform enables engineers to:
 
 ## Phase 1: Standalone SPI Master Verification
 
-Performed a detailed study of the SPI Master standalone verification environment to understand the complete verification workflow.
+Performed a detailed study of the SPI Master standalone verification environment to understand the complete verification workflow (check out the "spi_master_verification" directory for detailed report).
 
 ### Highlights
 
@@ -56,7 +56,7 @@ Performed a detailed study of the SPI Master standalone verification environment
 
 ## Phase 2: Standalone Block Verification
 
-Executed all standalone verification tests and documented their simulation results.
+Executed all standalone verification tests and documented their simulation results (check out the "standalone_results" directory for detailed report).
 
 ### Highlights
 
@@ -81,7 +81,7 @@ Executed all standalone verification tests and documented their simulation resul
 
 ## Phase 3: Caravel Integrated Verification
 
-Executed all Caravel-integrated verification tests to validate peripherals and management SoC functionality inside the Caravel environment.
+Executed all Caravel-integrated verification tests to validate peripherals and management SoC functionality inside the Caravel environment (check out the "caravel_results" directory for detailed report).
 
 ### Highlights
 
@@ -111,7 +111,7 @@ Executed all Caravel-integrated verification tests to validate peripherals and m
 
 ## Phase 4: Verification Flow Understanding
 
-Studied the verification methodology used across all standalone and Caravel test environments.
+Studied the verification methodology used across all standalone and Caravel test environments (check out the "verification_flow" directory for detailed report).
 
 ### General Verification Flow
 
