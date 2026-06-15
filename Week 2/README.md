@@ -84,7 +84,7 @@ Explored reports, logs, Makefiles, and Linux utilities used throughout the flow.
 
 ## Learning Experience
 
-Week-2 focused on understanding and controlling the complete RTL-to-GDS toolchain. I explored ORFS in both cloud and local environments, studied its supporting infrastructure, built OpenROAD from source, re-executed the flow locally, and analyzed the generated reports and logs.
+This excercise focused on understanding and controlling the complete RTL-to-GDS toolchain. I explored ORFS in both cloud and local environments, studied its supporting infrastructure, built OpenROAD from source, re-executed the flow locally, and analyzed the generated reports and logs.
 
 This experience improved my understanding of OpenROAD, ORFS, Linux environments, build systems, and automated ASIC implementation flows.
 
