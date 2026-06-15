@@ -190,13 +190,38 @@ After routing, filler cells are inserted into the unused spaces between standard
 
 ---
 
-## Final Report, GDSII Generation and Timing Summary
+## Final Report
 
-The final stage performs implementation reporting, generates the final GDSII layout, and produces the final timing summary.
+The final report summarizes the overall implementation statistics after completion of the physical design flow. It provides important information such as design area, utilization, cell count, IR-drop analysis, and total execution time. This report serves as a quick overview of the completed implementation before final sign-off.
 
-The generated reports include design area, utilization, IR-drop statistics, cell count, runtime information and timing metrics such as TNS, WNS, worst slack, minimum clock period and clock skew. The final manufacturable GDSII file is also generated during this stage.
+![Final Report](Screenshots/11.png)
 
-![Final Report, Runtime and Timing Summary](Screenshots/11.png)
+---
+
+## GDSII Generation
+
+After successful completion of all implementation stages, ORFS generates the final **GDSII** file (`6_final.gds`), which represents the complete physical layout of the design. The GDSII file is the standard format sent for fabrication and contains all geometric information required to manufacture the chip.
+
+The runtime summary generated during this stage also lists the outputs produced at each implementation step along with the execution time and peak memory usage.
+
+![GDSII Generation](Screenshots/12.png)
+
+---
+
+## Final Timing Summary
+
+The final timing report (`6_finish.rpt`) is generated after physical implementation and verifies whether the design satisfies all timing constraints. The report includes:
+
+- **TNS (Total Negative Slack):** Overall timing violations in the design.
+- **WNS (Worst Negative Slack):** Worst timing path in the design.
+- **Worst Slack:** Slack of the most critical timing path.
+- **Minimum Clock Period:** Smallest clock period the design can reliably operate at.
+- **Maximum Operating Frequency (Fmax):** Maximum achievable clock frequency.
+- **Clock Skew:** Difference in clock arrival times between source and destination flip-flops.
+
+For this implementation, both **TNS** and **WNS** are **0**, indicating that all timing constraints are successfully met.
+
+![Final Timing Summary](Screenshots/13.png)
 
 ---
 
