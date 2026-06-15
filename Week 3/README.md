@@ -144,6 +144,6 @@ PASS / FAIL
 
 ## Learning Experience
 
-Week-3 focused on understanding the complete block-level verification infrastructure used in the VSDSquadron SoC environment. I studied a standalone SPI Master verification flow in detail, executed standalone and Caravel-integrated tests, analyzed simulation outcomes, and documented the overall verification methodology.
+This excercise focused on understanding the complete block-level verification infrastructure used in the VSDSquadron SoC environment. I studied a standalone SPI Master verification flow in detail, executed standalone and Caravel-integrated tests, analyzed simulation outcomes, and documented the overall verification methodology.
 
 This experience strengthened my understanding of firmware-assisted verification, RTL simulation, waveform analysis, debugging techniques, and SoC verification workflows.
