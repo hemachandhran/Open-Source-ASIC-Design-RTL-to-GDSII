@@ -1,6 +1,6 @@
 # OpenROAD Flow Scripts (ORFS) RTL-to-GDSII Journey
 
-This repository documents my journey of understanding, installing, executing, and analyzing the OpenROAD Flow Scripts (ORFS) environment using the SKY130HD PDK and OpenROAD toolchain.
+This directory documents my journey of understanding, installing, executing, and analyzing the OpenROAD Flow Scripts (ORFS) environment using the SKY130HD PDK and OpenROAD toolchain.
 
 ---
 
