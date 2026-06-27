@@ -26,7 +26,7 @@ The standalone verification suite was executed using the synthesized gate-level 
 
 **Status:** PASS
 
-![GPIO Management GLS](Screenshots/standalone results/gpio_mgmt.png)
+![GPIO Management GLS](Screenshots/standalone_results/gpio_mgmt.png)
 
 The GPIO Management standalone test completed successfully under gate-level simulation, confirming correct GPIO control and signal transitions.
 
@@ -36,7 +36,7 @@ The GPIO Management standalone test completed successfully under gate-level simu
 
 **Status:** PASS
 
-![Memory GLS](Screenshots/standalone results/mem.png)
+![Memory GLS](Screenshots/standalone_results/mem.png)
 
 The memory verification completed successfully. Read and write operations produced the expected results under gate-level simulation.
 
@@ -46,7 +46,7 @@ The memory verification completed successfully. Read and write operations produc
 
 **Status:** PASS
 
-![UART GLS](Screenshots/standalone results/uart.png)
+![UART GLS](Screenshots/standalone_results/uart.png)
 
 The UART standalone verification passed successfully with correct serial transmission and expected functionality.
 
@@ -56,7 +56,7 @@ The UART standalone verification passed successfully with correct serial transmi
 
 **Status:** PASS
 
-![SPI Master GLS](Screenshots/standalone results/spi_master.png)
+![SPI Master GLS](Screenshots/standalone_results/spi_master.png)
 
 The SPI Master verification completed successfully, validating correct clock generation and data transfer.
 
@@ -66,7 +66,7 @@ The SPI Master verification completed successfully, validating correct clock gen
 
 **Status:** FAIL (Timeout)
 
-![Timer GLS](Screenshots/standalone results/timer.png)
+![Timer GLS](Screenshots/standalone_results/timer.png)
 
 The Timer test exceeded the simulation timeout during gate-level verification. The additional propagation delays introduced by synthesized logic prevented the test from completing within the predefined timeout period.
 
@@ -76,7 +76,7 @@ The Timer test exceeded the simulation timeout during gate-level verification. T
 
 **Status:** FAIL (Timeout)
 
-![IRQ GLS](Screenshots/standalone results/irq.png)
+![IRQ GLS](Screenshots/standalone_results/irq.png)
 
 The interrupt verification timed out under gate-level simulation due to increased propagation delays affecting the completion of the interrupt handling sequence.
 
@@ -86,7 +86,7 @@ The interrupt verification timed out under gate-level simulation due to increase
 
 **Status:** FAIL (Timeout)
 
-![Debug GLS](Screenshots/standalone results/debug.png)
+![Debug GLS](Screenshots/standalone_results/debug.png)
 
 The Debug standalone test continued to timeout during gate-level simulation. This behavior was already present during RTL verification, indicating a pre-existing RTL limitation rather than an issue introduced by GLS.
 
