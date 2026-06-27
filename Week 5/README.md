@@ -6,12 +6,6 @@ The gate-level netlist generated during Week 4 was used for all GLS verification
 
 The file was copied into the Caravel project so it could be used by the existing verification environment without changing the overall flow.
 
-The netlist was copied using:
-
-```bash
-cp OpenROAD-flow-scripts/flow/results/sky130hd/gcd/base/6_final.v \
-/home/vsduser/vsdsquadron-soc/caravel/verilog/gl/
-```
 
 ![OpenROAD Results](Screenshots/1.png)
 
