@@ -33,7 +33,11 @@ The existing testbenches were reused without any modifications.
 
 <br>
 
-![Modified Compilation Command](Screenshots/4.png)
+<p>
+<img src="Screenshots/4.png" width="800">
+ 
+</p>
+
 
 *Figure 4: Updated compilation command using `6_final.v` and the SKY130 standard-cell libraries.*
 
@@ -42,6 +46,8 @@ The existing testbenches were reused without any modifications.
 ## Phase 3 – Standalone GLS Verification
 
 After updating the verification flow, all standalone tests were executed using the synthesized gate-level netlist. The results were then compared with the RTL verification results obtained during Week 3.
+
+The complete GLS results for the individual standalone block verification is available in **standalone_gls_results.md**.
 
 ### Standalone GLS Result Table
 
@@ -62,6 +68,8 @@ The gate-level simulation results matched the RTL verification results for all s
 ## Phase 4 – Caravel GLS Verification
 
 The same gate-level netlist was then verified using the complete Caravel test suite. No changes were made to the testbenches, allowing the synthesized design to be validated in the same environment that was used for RTL verification.
+
+The complete GLS results for the individual caravel block verification is available in **caravel_gls_results.md**.
 
 ### Caravel GLS Result Table
 
@@ -86,7 +94,37 @@ The Caravel integration tests also produced results consistent with the RTL veri
 
 ## Phase 5 – GTKWave Visualization
 
-*To be completed.*
+After completing gate-level simulation, the generated waveforms were analyzed to verify the functionality of the synthesized design. The waveforms confirmed the correct operation of the major modules and were used to compare the behavior of the standalone design with the complete Caravel integration.
+
+### Standalone Gate-Level Simulation
+
+The standalone gate-level waveforms verified the functionality of the individual peripherals, including UART, GPIO Management, Memory, SPI Master, Timer, IRQ, and Debug. These waveforms confirmed that the synthesized design behaved as expected, while also showing the timing effects introduced after synthesis and physical implementation.
+
+The complete waveform analysis for the standalone verification is available in **waveform_analysis.md**.
+
+The overall standalone gate-level verification results are shown below.
+
+<p>
+<img src="Waveforms/standalone/report.png" width="800">
+ 
+</p>
+
+
+---
+
+### Caravel Gate-Level Simulation
+
+After standalone verification, the synthesized design was integrated into the Caravel framework and verified using the Caravel gate-level test suite. Waveforms were analyzed for User Pass Through, UART, SysCtrl, SRAM Execution, SPI Master, Pull-up/Pull-down, PLL, Pass-through Fix, Memory, HKSPI Power, GPIO Management, and HKSPI. These waveforms confirmed correct integration of the synthesized netlist within the complete SoC environment.
+
+The complete waveform analysis for the Caravel verification is available in **waveform_analysis.md**.
+
+The overall Caravel gate-level verification results are shown below.
+
+![Caravel GLS Results](Waveforms/caravel/report.png)
+
+#### NOTE:
+
+The waveform analysis, together with the verification results, confirms that the synthesized design preserved its functionality after synthesis and physical implementation. Although a few timing-sensitive tests showed expected gate-level limitations, the overall functionality of the design remained consistent in both standalone and Caravel gate-level simulations.
 
 ---
 
