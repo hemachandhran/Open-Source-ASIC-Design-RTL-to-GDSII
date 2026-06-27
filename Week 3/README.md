@@ -1,6 +1,6 @@
 # Block-Level Verification of VSDSquadron SoC
 
-This repository documents my journey of understanding, executing, analyzing, and documenting the block-level verification flow of the VSDSquadron SoC in two levels:
+This directory documents my journey of understanding, executing, analyzing, and documenting the block-level verification flow of the VSDSquadron SoC in two levels:
 
 1. **Standalone Verification** – Individual blocks were tested independently to validate their functionality.
 2. **Caravel Integrated Verification** – The same peripherals were verified within the complete SoC environment to study real system interactions.
