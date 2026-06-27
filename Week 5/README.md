@@ -1,4 +1,4 @@
-# WEEK 5 – Gate-Level Simulation (GLS) for Full Block Verification
+# Gate-Level Simulation (GLS) for Full Block Verification
 
 ## Phase 1 – Preparing the Gate-Level Netlist
 
@@ -155,7 +155,7 @@ Through this debugging process, I learned how gate-level simulation differs from
 
 ## Conclusion
 
-In this week, the synthesized gate-level netlist generated during Week 4 was successfully integrated into the Caravel verification environment. After updating the Makefiles and resolving the initial integration issues, both the standalone and Caravel test suites were executed using gate-level simulation.
+In this exercise, the synthesized gate-level netlist generated during Week 4 was successfully integrated into the Caravel verification environment. After updating the Makefiles and resolving the initial integration issues, both the standalone and Caravel test suites were executed using gate-level simulation.
 
 The final GLS results matched the RTL verification results for all functional tests. The remaining timeout and PLL failures were consistent with the Week 3 RTL results, confirming that no new functional issues were introduced during synthesis or physical implementation.
 
@@ -165,7 +165,7 @@ Overall, this week's work verified that the implemented design remained function
 
 ## Learning Experience
 
-This week gave me practical experience in working with gate-level simulation and understanding how it differs from RTL verification. I learned how synthesized netlists are integrated into an existing verification environment, how standard-cell libraries are used during simulation, and how to debug common integration issues such as power-pin mismatches and missing library files.
+This excercise gave me practical experience in working with gate-level simulation and understanding how it differs from RTL verification. I learned how synthesized netlists are integrated into an existing verification environment, how standard-cell libraries are used during simulation, and how to debug common integration issues such as power-pin mismatches and missing library files.
 
 Working through these problems also helped me understand the impact of clock tree synthesis, routing delays, and reset propagation on the final hardware behavior. Successfully completing both the standalone and Caravel GLS verification gave me a much better understanding of the complete ASIC design and verification flow from RTL to physical implementation.
 
