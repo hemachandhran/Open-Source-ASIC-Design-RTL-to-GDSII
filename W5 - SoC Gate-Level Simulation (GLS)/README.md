@@ -1,6 +1,6 @@
 # Gate-Level Simulation (GLS) for Full Block Verification
 
-This directory documents the complete gate-level verification flow, waveform analysis, debugging process, and comparison between RTL and gate-level simulation results of caravel and standalone blocks.
+This directory documents the complete gate-level verification flow, waveform analysis, debugging process, and comparison between RTL and gate-level simulation results of caravel and standalone blocks of VSDsquadron SoC.
 
 ---
 
