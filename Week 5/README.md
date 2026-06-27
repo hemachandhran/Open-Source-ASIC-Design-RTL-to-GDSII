@@ -1,5 +1,9 @@
 # Gate-Level Simulation (GLS) for Full Block Verification
 
+This directory documents the complete gate-level verification flow, waveform analysis, debugging process, and comparison between RTL and gate-level simulation results of caravel and standalone blocks.
+
+---
+
 ## Phase 1 – Preparing the Gate-Level Netlist
 
 The gate-level netlist generated during Week 4 was used for all GLS verification. Among the files produced by the OpenROAD flow, `6_final.v` represents the final implemented design after placement and routing, making it the correct netlist for gate-level simulation.
