@@ -1,4 +1,7 @@
 # RTL-to-GDS Implementation of User Project Wrapper
+
+This directory documents the complete RTL-to-GDSII implementation of the Caravel user_project_wrapper using OpenROAD Flow Scripts (ORFS), including design setup, synthesis, physical design, timing analysis, GDSII generation, and implementation result analysis.
+
 ---
 
 # PHASE 1 – Analyze the Top-Level Wrapper
