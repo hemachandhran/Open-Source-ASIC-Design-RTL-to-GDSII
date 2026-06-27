@@ -1,6 +1,6 @@
 # PicoRV32A ASIC Design Flow using OpenLane (SKY130)
 
-This repository documents the complete RTL-to-GDSII implementation of the PicoRV32A RISC-V processor using the OpenLane flow and SKY130A PDK.
+This directory documents the complete RTL-to-GDSII implementation of the PicoRV32A RISC-V processor using the OpenLane flow and SKY130A PDK.
 
 ---
 
