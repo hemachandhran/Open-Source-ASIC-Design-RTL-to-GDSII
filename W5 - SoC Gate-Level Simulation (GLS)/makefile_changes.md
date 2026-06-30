@@ -1,195 +1,205 @@
-# -----------------------------------------------------------------------------
-# Clean Makefile for caravel_mgmt_soc_litex standalone tests (gpio_mgmt)
-# Adds auto-symlink so linker script INCLUDE ../generated/regions.ld works.
-# -----------------------------------------------------------------------------
+# Makefile Changes for Gate-Level Simulation (GLS)
 
-PWDD   := $(shell pwd)
-BLOCKS := $(notdir $(PWDD))
+To perform Gate-Level Simulation (GLS), the original Makefile was modified so that the simulator compiles the synthesized gate-level netlist instead of the RTL source files. Only a few changes were required, but each one is important for successful GLS.
 
-CONFIG ?= caravel
-SIM    ?= GL
+## 1. Simulation Mode
 
-# Paths
-DESIGNS ?= /home/vsduser/vsdsquadron-soc
+The simulation mode was changed from RTL to GL.
 
-export PDK_ROOT ?= /home/vsduser/.ciel
-export PDK ?= sky130A
-export CARAVEL_VERILOG_PATH ?= $(DESIGNS)/caravel/verilog
-export CORE_VERILOG_PATH    ?= $(DESIGNS)/caravel_mgmt_soc_litex/verilog
-export USER_PROJECT_VERILOG ?= $(DESIGNS)/verilog
+**Before**
 
-export CARAVEL_PATH := $(CARAVEL_VERILOG_PATH)
-export VERILOG_PATH := $(CORE_VERILOG_PATH)
+```make
+SIM ?= RTL
+```
 
-# Define these AFTER CORE_VERILOG_PATH is set (important!)
-export VIP_PATH      := $(CORE_VERILOG_PATH)/dv/vip
-export FIRMWARE_PATH := $(CORE_VERILOG_PATH)/dv/firmware
+**After**
 
-# Toolchain
-export GCC_PATH   ?= /home/vsduser/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/bin
-export GCC_PREFIX ?= riscv64-unknown-elf
+```make
+SIM ?= GL
+```
 
-# CPU selection
-CPU ?= vexriscv
+This instructs the Makefile to execute the Gate-Level Simulation section instead of the RTL simulation commands.
 
-CPUFLAGS_vexriscv := -march=rv32i -mabi=ilp32 -D__vexriscv__
-CPUFLAGS_picorv32 := -march=rv32i -mabi=ilp32
-CPUFLAGS_ibex     := -march=rv32i -mabi=ilp32
+<br>
 
-LINKER_SCRIPT :=
-SOURCE_FILES  :=
-CPUFLAGS      :=
+<p align="center">
+<img src="Screenshots/3.png" width="450">
+</p>
 
-ifeq ($(CPU),picorv32)
-  LINKER_SCRIPT := $(FIRMWARE_PATH)/sections.lds
-  SOURCE_FILES  := $(FIRMWARE_PATH)/start.s
-  CPUFLAGS      := $(CPUFLAGS_picorv32)
-endif
+<p align="center">
+<b>Figure 1:</b> Simulation mode changed from RTL to GL.
+</p>
 
-ifeq ($(CPU),ibex)
-  LINKER_SCRIPT := $(FIRMWARE_PATH)/link_ibex.ld
-  SOURCE_FILES  := $(FIRMWARE_PATH)/crt0_ibex.S $(FIRMWARE_PATH)/simple_system_common.c
-  CPUFLAGS      := $(CPUFLAGS_ibex)
-endif
+---
 
-ifeq ($(CPU),vexriscv)
-  LINKER_SCRIPT := $(FIRMWARE_PATH)/sections_vexriscv.lds
-  SOURCE_FILES  := $(FIRMWARE_PATH)/start_caravel_vexriscv.s
-  CPUFLAGS      := $(CPUFLAGS_vexriscv)
-endif
+## 2. Updating the GLS Compilation Command
 
-export IVERILOG_DUMPER = fst
+The original Makefile compiled the RTL design using the standard Caravel include files. For GLS, the synthesized netlist (`6_final.v`) generated after physical design must be compiled instead.
 
-.SUFFIXES:
+The following modifications were made inside the `ifeq ($(SIM),GL)` section.
 
-all: $(BLOCKS).vcd $(BLOCKS).lst
-hex: $(BLOCKS).hex
+<p align="center">
+<img src="Screenshots/4.png" width="800">
+</p>
 
-# -----------------------------------------------------------------------------
-# Linker-script include helper
-# sections_vexriscv.lds includes "../generated/regions.ld"
-# From gpio_mgmt/, that path means tests-standalone/generated/regions.ld
-# We create a symlink there pointing to dv/generated/regions.ld
-# -----------------------------------------------------------------------------
+<p align="center">
+<b>Figure 2:</b> Updated Gate-Level Simulation compilation command.
+</p>
 
-GEN_INCLUDE_DIR := $(abspath $(PWDD)/../generated)
-REAL_GENERATED  := $(abspath $(VERILOG_PATH)/dv/generated)
+---
 
-prepare-generated:
-	@mkdir -p "$(GEN_INCLUDE_DIR)"
-	@if [ -f "$(REAL_GENERATED)/regions.ld" ]; then \
-		ln -sf "$(REAL_GENERATED)/regions.ld" "$(GEN_INCLUDE_DIR)/regions.ld"; \
-	else \
-		echo "ERROR: Missing $(REAL_GENERATED)/regions.ld"; exit 1; \
-	fi
+## 3. Purpose of Each Makefile Option
 
-# -----------------------------------------------------------------------------
-# Build firmware
-# -----------------------------------------------------------------------------
+### `-y`
 
-check-fw: prepare-generated
-	@test -n "$(LINKER_SCRIPT)" || (echo "ERROR: LINKER_SCRIPT is empty. Set CPU correctly (CPU=vexriscv/picorv32/ibex)."; exit 1)
-	@test -f "$(LINKER_SCRIPT)" || (echo "ERROR: Missing linker script: $(LINKER_SCRIPT)"; exit 1)
-	@for f in $(SOURCE_FILES); do \
-		test -f $$f || (echo "ERROR: Missing source file: $$f"; exit 1); \
-	done
+```make
+-y $(CARAVEL_VERILOG_PATH)/rtl
+```
 
-%.elf: %.c check-fw
-	$(GCC_PATH)/$(GCC_PREFIX)-gcc -g \
-	  -I$(FIRMWARE_PATH) \
-	  -I$(VERILOG_PATH)/dv/generated \
-	  -I$(VERILOG_PATH)/dv/ \
-	  -I$(VERILOG_PATH)/common \
-	  $(CPUFLAGS) \
-	  -ffreestanding -nostdlib \
-	  -Wl,-Bstatic \
-	  -Wl,-T,$(LINKER_SCRIPT) \
-	  -Wl,--strip-debug \
-	  -o $@ $(SOURCE_FILES) $<
+The `-y` option tells Icarus Verilog to search this directory whenever it encounters a module that has not yet been compiled.
 
-%.lst: %.elf
-	$(GCC_PATH)/$(GCC_PREFIX)-objdump -d -S $< > $@
+Instead of manually listing every RTL file, the simulator automatically searches this directory whenever a required module is instantiated.
 
-%.hex: %.elf
-	$(GCC_PATH)/$(GCC_PREFIX)-objcopy -O verilog $< $@
-	#sed -ie 's/@10/@00/g' $@
-	sed -i 's/^@1000/@0000/' $@
+In this project, it is used to locate the Caravel RTL modules such as:
 
-%.bin: %.elf
-	$(GCC_PATH)/$(GCC_PREFIX)-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
+- `caravel.v`
+- `caravel_core.v`
+- other wrapper modules
 
-# -----------------------------------------------------------------------------
-# Run simulations
-# -----------------------------------------------------------------------------
+without explicitly mentioning every file.
 
-%.vvp: %_tb.v %.hex
+---
 
-ifeq ($(SIM),RTL)
-ifeq ($(CONFIG),caravel_user_project)
-	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-	  -f$(VERILOG_PATH)/includes/includes.rtl.caravel \
-	  -f$(USER_PROJECT_VERILOG)/includes/includes.rtl.$(CONFIG) \
-	  -o $@ $<
-else
-	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-	  -y /home/vsduser/vsdsquadron-soc/caravel/verilog/rtl \
-	  -I /home/vsduser/vsdsquadron-soc/caravel/verilog/rtl \
-	  -f $(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
-	  -o $@ $(CARAVEL_PATH)/rtl/__user_project_wrapper.v $<
-endif
-endif
+### `-I`
 
-ifeq ($(SIM),GL)
-ifeq ($(CONFIG),caravel_user_project)
-	iverilog -Ttyp -DFUNCTIONAL -DGL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-	  -f$(VERILOG_PATH)/includes/includes.gl.caravel \
-	  -f$(USER_PROJECT_VERILOG)/includes/includes.gl.$(CONFIG) \
-	  -o $@ $<
-else
-	iverilog -Ttyp -DFUNCTIONAL -DGL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-	  -y $(CARAVEL_VERILOG_PATH)/rtl \
-	  -I $(CARAVEL_VERILOG_PATH)/rtl \
-	  -f $(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
-	  $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v \
-	  $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v \
-          /home/vsduser/vsdsquadron-soc/caravel/verilog/gl/6_final.v \
-	  -o $@ $<
-endif
-endif
+```make
+-I $(CARAVEL_VERILOG_PATH)/rtl
+```
 
-ifeq ($(SIM),GL_SDF)
-ifeq ($(CONFIG),caravel_user_project)
-	cvc64 +interp \
-	  +define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
-	  +change_port_type +dump2fst +fst+parallel2=on +nointeractive +notimingchecks +mipdopt \
-	  -f $(VERILOG_PATH)/includes/includes.gl+sdf.caravel \
-	  -f $(USER_PROJECT_VERILOG)/includes/includes.gl+sdf.$(CONFIG) $<
-else
-	cvc64 +interp \
-	  +define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
-	  +change_port_type +dump2fst +fst+parallel2=on +nointeractive +notimingchecks +mipdopt \
-	  -f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) \
-	  -f $(CARAVEL_PATH)/gl/__user_project_wrapper.v $<
-endif
-endif
+The `-I` option specifies the directory where Verilog include files (`.vh`) are located.
 
-%.vcd: %.vvp
-ifeq ($(SIM),RTL)
-	vvp $<
-	mv $@ RTL-$@
-endif
-ifeq ($(SIM),GL)
-	vvp $<
-	mv $@ GL-$@
-endif
-ifeq ($(SIM),GL_SDF)
-	mv $@ GL_SDF-$@
-endif
+Whenever the compiler encounters statements such as
 
-clean:
-	rm -f *.elf *.hex *.bin *.vvp *.log *.vcd *.lst *.hexe
-	rm -f *.hexie
-	rm -rf "$(GEN_INCLUDE_DIR)"
+```verilog
+`include "defines.v"
+```
 
-.PHONY: clean hex all prepare-generated check-fw
+it searches the directories specified using `-I`.
 
+Without this option, compilation would fail because the required header files could not be located.
+
+---
+
+### `-f`
+
+```make
+-f $(VERILOG_PATH)/includes/includes.rtl.$(CONFIG)
+```
+
+The `-f` option instructs Icarus Verilog to read a file that contains a list of Verilog source files.
+
+Instead of writing
+
+```bash
+iverilog file1.v file2.v file3.v ...
+```
+
+the file specified by `-f` contains the complete list of required source files.
+
+This makes the Makefile easier to maintain because only the file list needs to be updated rather than modifying long compile commands.
+
+---
+
+## 4. Including SKY130 Standard Cell Libraries
+
+Unlike RTL simulation, a synthesized netlist is composed of SKY130 standard cells such as:
+
+```verilog
+sky130_fd_sc_hd__and2_1
+sky130_fd_sc_hd__dfrtp_1
+sky130_fd_sc_hd__buf_2
+```
+
+These cells are not built into the simulator.
+
+Therefore the following library files must be compiled before the synthesized netlist.
+
+```make
+$(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v
+```
+
+This file contains the primitive definitions used by the standard cells.
+
+```make
+$(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
+```
+
+This file contains the Verilog models for every SKY130 HD standard cell.
+
+Without these libraries, the simulator would report errors such as
+
+```
+Unknown module:
+sky130_fd_sc_hd__conb_1
+```
+
+because it would not recognize the synthesized cells.
+
+---
+
+## 5. Replacing RTL with the Synthesized Netlist
+
+The most important modification was replacing the RTL source with the synthesized gate-level netlist.
+
+Instead of compiling the RTL implementation,
+
+```make
+$(CARAVEL_PATH)/rtl/__user_project_wrapper.v
+```
+
+the Makefile now compiles
+
+```make
+/home/vsduser/vsdsquadron-soc/caravel/verilog/gl/6_final.v
+```
+
+The file `6_final.v` is the gate-level netlist generated after synthesis, placement, clock tree synthesis, routing, and optimization.
+
+As a result, the simulator verifies the actual hardware implementation rather than the behavioral RTL description.
+
+---
+
+## 6. Dependency Order During Compilation
+
+The compilation order is important because each stage depends on the previous one.
+
+```
+Testbench
+      │
+      ▼
+Caravel RTL Wrapper (-y)
+      │
+      ▼
+Include Files (-I)
+      │
+      ▼
+Source File List (-f)
+      │
+      ▼
+SKY130 Standard Cell Libraries
+(primitives.v + sky130_fd_sc_hd.v)
+      │
+      ▼
+Synthesized Netlist (6_final.v)
+      │
+      ▼
+Gate-Level Simulation
+```
+
+If any dependency is missing, compilation fails before simulation begins.
+
+---
+
+## Summary
+
+The Makefile modifications were relatively small but essential for enabling Gate-Level Simulation. The simulation mode was changed from RTL to GL, the synthesized netlist (`6_final.v`) replaced the RTL source, and the required SKY130 standard-cell libraries were added to the compilation command. The use of `-y`, `-I`, and `-f` ensured that the simulator could automatically locate RTL modules, include files, and source lists. Together, these changes allowed the existing verification environment to execute gate-level simulations without requiring any modifications to the testbenches.
