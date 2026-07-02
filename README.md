@@ -3,20 +3,20 @@
 > A hands-on portfolio documenting my journey through the complete open-source ASIC design flow, from RTL to GDSII, using OpenLane, OpenROAD, ORFS, SKY130, Caravel, and VSDSquadron.
 
 <p align="center">
-  <img src="W1 - PicoRV32A ASIC Design Flow/Phase 1/Screenshots/Openlane_flow.png" width="900">
+  <img src="W1 - PicoRV32A ASIC Design Flow -OpenLane/Phase 1/Screenshots/openlane_flow.png" width="900">
 </p>
 
 ---
 
 # 📖 About
 
-This repository documents my hands-on journey through the complete open-source ASIC design flow, covering every major stage from RTL design to the final GDSII layout.
+This repository documents my hands-on journey through the complete open-source ASIC design flow, from RTL design to the final GDSII layout using **OpenLane**, **OpenROAD Flow Scripts (ORFS)**, **SKY130**, and the **Caravel SoC** ecosystem.
 
-Throughout this journey, I explored multiple implementation and verification flows using **OpenLane**, **OpenROAD Flow Scripts (ORFS)**, **SKY130**, and the **Caravel SoC** ecosystem. Rather than simply executing the flow, I focused on understanding how each stage transforms a digital design, how the different tools interact, and how implementation decisions affect timing, area, routing, and overall design quality.
+Along the way, I explored RTL synthesis, physical design, timing analysis, routing, and verification while understanding how each stage transforms a digital design and how implementation decisions impact timing, area, and overall design quality.
 
-A significant part of this repository also focuses on **verification**. Using the **VSDSquadron SoC**, I explored both standalone peripheral verification and system-level verification within the **Caravel SoC** environment. I further extended this work by performing **Mixed-Mode Gate-Level Simulation (GLS)**, validating synthesized netlists inside the complete SoC without modifying the existing verification infrastructure. This provided valuable insight into post-layout verification and the differences between RTL and gate-level behavior.
+Using the **VSDSquadron SoC**, I performed standalone and Caravel-based verification, followed by **Mixed-Mode Gate-Level Simulation (GLS)** to validate synthesized netlists within the complete SoC environment. This provided practical experience with post-layout verification and RTL vs. gate-level behavior.
 
-Working through multiple implementation flows, debugging failed builds, resolving synthesis and routing issues, fixing floorplanning errors, integrating custom RTL, configuring Makefiles, handling standard-cell libraries, and validating gate-level simulations significantly strengthened my debugging and problem-solving skills. More importantly, it helped me understand not only *how* ASIC tools work, but also *why* different design and verification methodologies are used throughout the modern chip design process.
+Beyond learning the tools, this journey strengthened my debugging and problem-solving skills by working through multiple implementation flows, resolving synthesis and routing issues, configuring design environments, and debugging gate-level simulations.
 
 ---
 
@@ -25,41 +25,6 @@ Working through multiple implementation flows, debugging failed builds, resolvin
 The **Caravel SoC** is an open-source SoC integration platform developed by **Efabless** for the Open MPW shuttle program. It provides a complete RISC-V based system with standardized interfaces, memory, GPIO, Wishbone bus, logic analyzer connections, clocking infrastructure, and a dedicated user project area where custom ASIC designs can be integrated.
 
 Because Caravel already includes the infrastructure required for fabrication and verification, it allows designers to focus on implementing and validating their own hardware while learning realistic SoC integration and verification workflows similar to those used in industry.
-
----
-
-# 🛣 ASIC Design Flow
-
-```text
-RTL Design
-    │
-    ▼
-Logic Synthesis
-    │
-    ▼
-Static Timing Analysis
-    │
-    ▼
-Floorplanning
-    │
-    ▼
-Placement
-    │
-    ▼
-Clock Tree Synthesis
-    │
-    ▼
-Routing
-    │
-    ▼
-Physical Verification
-    │
-    ▼
-GDSII Generation
-    │
-    ▼
-Mixed-Mode Gate-Level Simulation
-```
 
 ---
 
